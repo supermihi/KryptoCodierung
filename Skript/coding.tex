@@ -194,7 +194,7 @@ Bei mehr als $t$ Fehlern kann es passieren, dass der ML-Decodierer ein falsches 
 Durch die disjunkten $t$-Kugeln wissen wir, das bei ML-Decodierung im Fall von höchstens $t$ Übertragungsfehlern korrekt decodiert wird. Bei mehr als $t$ Fehlern hängt dies jedoch von der genauen Struktur des Codes ab: entweder landet $y$ in der $t$-Kugel um ein falsches Codewort $x'$ (dann kommt es zum Decodierfehler) oder aber im Zwischenraum zwischen allen $t$-Kugeln – in diesem Fall könnte $x$ immer noch das Codewort mit kleinstem Abstand zu $y$ sein, muss aber nicht. Da dieser Fall schwer zu analysieren ist, wäre es schön, wenn es gar keinen solchen Zwischenraum gäbe – dann nennt man einen Code \emph{perfekt}.
 
 \begin{definition}\label{def:perfect}
-  Ein Code $\C$ mit Minimaldistanz $d≥1$ und $t=⌊(d-1)/2⌋$ heißt \emphex[Code!perfekt]{perfekt}\index{perfekter Code}, wenn 
+  Ein Code $\C$ mit Minimaldistanz $d≥1$ und $t=⌊(d-1)/2⌋$ heißt \emphex[Code!perfekter]{perfekt}, wenn 
   \[ \GF(2)^N = ⋃_{x∈\C} \B_t(x) \]
   gilt, die (disjunkte) Vereinigung aller $t$-Kugeln um die Codewörter also den ganzen Raum ausfüllt.
 \end{definition}

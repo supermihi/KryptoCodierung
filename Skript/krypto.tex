@@ -67,7 +67,7 @@ Zur Erinnerung:
 \begin{definition}[Alphabete und Wörter]
 Ein \emphex[Alphabet]{Alphabet $A$} ist eine endliche nichtleere Menge. Ihre Mächtigkeit $|A|$ wird \emph{Länge des Alphabets} genannt und ihre Elemente heißen \emph{Buchstaben}. 
 \begin{enumerate}
- \item Ein Element $w = (w_1, \dots, w_n) \in A^n$ heißt \emphex[Wort]{Wort auf $A$ der Länge $\length(w) = n \in ℕ$}. Wir schreiben auch $w = w_1\dots w_n$.
+ \item Ein Element $w = (w_1, \dots, w_n) \in A^n$ heißt \emphex[Wort]{Wort auf $A$ der Länge \index{Wortlänge}$\length(w) = n \in ℕ$}. Wir schreiben auch $w = w_1\dots w_n$.
  \item Wir definieren $A^* = \bigcup_{n \in ℕ_0} A^n$ mit $A^0 = \{\varepsilon\}$, wobei $\varepsilon$ ein nicht im Alphabet enthaltenes Symbol ist, das für das \emphex[Wort!leeres]{leere Wort} der Länge $0$ steht.
  \item Seien $v = v_1\dots v_{n_v}, w = w_1\dots w_{n_w}$ Wörter auf $A$. Dann bezeichnet $v \circ w$ die \emph{Verkettung von $v$ und $w$}, die durch $v \circ w = v_1\dots v_{n_v} w_1\dots w_{n_w} \in A^*$ definiert ist. \\ ($\circ: A^* \times A^* → A^*$ ist also eine zweistellige Operation auf $A^*$.)
 \end{enumerate}
@@ -2162,7 +2162,7 @@ Da die Algorithmen von Secret-Key-Systemen in der Regel effizienter sind als die
 \begin{construction}[Kandidaten für Einwegfunktionen]{\ }
 \begin{enumerate}
  \item \emphex[Faktorisierungsproblem]{Das Faktorisierungsproblem (FP)}: Sei $n \in \N$. Finde eine Primzahl $p \in \N$, die $n$ teilt.
- \item \emphex[Logarithmus-Problem!diskrete]{Das diskrete Logarithmus-Problem (DLP)}: Sei $G = \langle g \rangle = \{g^0, g^1, g^2, \dotsc\}$ eine endliche zyklische Gruppe der Ordnung $n \in \N$ und $x \in G$. Finde ein $a \in \N$, so dass $g^a = x$ gilt. Eine solche Zahl $a \in \N$ nennt man \emphex[Logarithmus!diskret]{diskreten Logarithmus von $x$ zur Basis $g \in G$}.
+ \item \emphex[Logarithmus-Problem!diskretes]{Das diskrete Logarithmus-Problem (DLP)}: Sei $G = \langle g \rangle = \{g^0, g^1, g^2, \dotsc\}$ eine endliche zyklische Gruppe der Ordnung $n \in \N$ und $x \in G$. Finde ein $a \in \N$, so dass $g^a = x$ gilt. Eine solche Zahl $a \in \N$ nennt man \emphex[Logarithmus!diskret]{diskreten Logarithmus von $x$ zur Basis $g \in G$}.
 %  \item \emphex[Diffie-Hellman-Problem]{Das Diffie-Hellman-Problem (DHP)}: Seien $G = \langle g \rangle$ eine endliche zyklische Gruppe und $A, B \in \N$. Gegeben $g$, $g^A$ und $g^B$, berechne $g^{A \cdot B}$.
 %  \item \emphex[RSA-Problem]{Das RSA-Problem (RSAP)}:
 \end{enumerate}
