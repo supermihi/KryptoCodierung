@@ -1,0 +1,76 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Informations- und Codierungstheorie,
+  lectureshort = Codierungstheorie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {6.7.2015},
+  lecturer     = Michael Helmling,
+  operator     = Carolin Torchiani,
+  homepage     = {http://userpages.uni-koblenz.de/~helmling/coding},
+  sheetnumber  = 11,
+  solution=false,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage{cleveref}
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+\usepackage{amssymb}
+\usepackage[math,fonts=false]{mh_basic}
+\input{../Skript/definitions.tex}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+\usepackage{booktabs}
+\newcommand{\mc}{\mathcal}
+\newcommand{\GF}{\operatorname{GF}}
+\begin{document}
+\maketitle
+\begin{exercise}[title=Typizität]
+  \begin{enumerate}
+    \item Bestätigen Sie die Äquivalenz in Definition 5.50: Ist $X$ eine Zufallsvariable mit Alphabet $A$, $N∈ℕ$, $x∈A^N$ und $β>0$, gilt
+  \[
+    2^{-N(H(X)+β)} ≤ P_{X^N}(x) ≤ 2^{-N(H(X)-β)} ⇔ \abs{-\frac1N \log P_{X^N}(x) - H(X)} ≤ β \tp
+  \]
+  \item Zeigen Sie Aussagen 1 und 2 von Lemma 5.55. \emph{Hinweis zu Teil ~1: Schreiben Sie $H(X)$ und $H(Y)$ als Erwartungswert einer von  $(X,Y)$ abgeleiteten Zufallsvariable und verfahren Sie analog zu Lemma~5.52.}
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}
+    \item Einfach umrechnen.
+    \item Von Lemma~5.52 erhalten wir
+  \[P\( (X,Y)^N ∈ T_{N,β}(X,Y) \) ≥ 1 - ε/3\]
+  für hinreichend große $N$. Schreiben wir nach Bemerkung~5.27 $H(X) = \E[f(X,Y)]$ als Erwartungswert der Zufallsvariable $f(X,Y)$ mit $f(x,y) = -\log P_X(x)$, können wir analog zum Beweis von Lemma~5.52 das Gesetz der großen Zahlen auf $f(X,Y)$ anwenden und erhalten $P\(X^N ∈ T_{N,β}(X) \) ≥ 1-ε/3$ und analog $P\(Y^N∈T_{N,β}(Y)\) ≥ 1-ε/3$, jeweils für große $N$. Insgesamt gibt es also ein $N_0$, so dass
+      \begin{align*}
+        P((X,Y)^N \notin T'_{N,β}) &= P\( (X,Y)^N \notin T_{N,β}(X,Y)\text{ und } X^N \notin T_{N,β}(X) \text{ und } Y^N \notin T_{N,β}(Y)\) \\
+        &≤P\( (X,Y)^N \notin T_{N,β}(X,Y)\)+P\(X^N \notin T_{N,β}(X)\)+P\(Y^N \notin T_{N,β}(Y)\)\\
+        &≤\frac ε3 + \frac ε3 + \frac ε3 = ε\tk
+      \end{align*}
+      und damit $P((X,Y)^N ∈ T'_{N,β}) = 1 - P((X,Y)^N \notin T'_{N,β}) ≥ 1 -ε$ für alle $N>N_0$.
+      \item Folgt direkt aus Lemma~5.52, da $T'_{N,β}(X,Y) ⊆ T_{N,β}(X,Y)$ und damit $\abs{T'_{N,β}(X,Y)} ≤ \abs{T_{N,β}(X,Y)}$ für $N>N_0$ gilt.
+  \end{enumerate}
+\end{solution}
+
+\begin{exercise}[title=Quellencodierung mit Blockcodes]
+  In dieser Aufgabe werden wir die Aussage des Quellencodierungssatzes – Codierung einer Quelle $(A,X)$ mit durchschnittlich $<H(X)+ε$ Bits pro Symbol – für Blockcodes statt Symbolcodes zeigen. Wir nutzen dazu allgemeinere $(N,K)$-Blockcodes, die von $A^K$ nach $\GF(2)^N$ abbilden. Dazu müssen wir allerdings die Voraussetzungen ein wenig verändern, denn:
+  \begin{enumerate}
+    \item Sei $(A,X)$ eine Quelle, die mittels eines $(N,K)$-Blockcodes so codiert wird, dass das Ergebnis garantiert und eindeutig decodiert werden kann. Dann gilt $N/K≥\log \abs A$: pro Quellen-Symbol werden mindestens $\log \abs A$ Bits benötigt.
+  \end{enumerate}
+  Da im Allgemeinen $H(X)<\log \abs A$ gilt, erreichen wir damit nicht dieselbe Datenkompression wie mit Symbolcodes. Wir erlauben deshalb einen kleinen Fehler, der aber beliebig klein werden können muss:
+  \begin{enumerate}[resume]
+    \item Zeigen Sie: Ist $(A,X)$ eine Quelle und $ε, δ>0$, so gibt es einen $(N,K)$-Blockcode mit $N/K< H(X)+ε$, der die Daten der Quelle so codiert, dass jedes Symbol mit Wahrscheinlichkeit $>1-δ$ korrekt decodiert werden kann. \emph{Hinweis: codieren Sie nur $T_{K,β}(X)$!}
+  \end{enumerate}
+  Davon ausgehend erhalten wir dann doch wieder ein fehlerfreies Verfahren, indem wir die nicht-typischen $K$-Wörter aus der Quelle durch ein spezielles Codewort $\t s ∈ \GF(2)^N$ \enquote{ankündigen} und danach gesondert übertragen.
+  \begin{enumerate}[resume]
+    \item Zeigen Sie, dass für jedes $ε>0$ solch ein eindeutig decodierbarer \enquote{Fast-Blockcode} existiert, der im Mittel $<H(X)+ε$ Bits pro Symbol benötigt.
+  \end{enumerate}
+\end{exercise}
+ 
+\end{document}

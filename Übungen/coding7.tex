@@ -1,0 +1,64 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Informations- und Codierungstheorie,
+  lectureshort = Codierungstheorie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {20.7.2015},
+  lecturer     = Michael Helmling,
+  operator     = Carolin Torchiani,
+  homepage     = {http://userpages.uni-koblenz.de/~helmling/coding},
+  sheetnumber  = 13,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage{cleveref}
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+\usepackage{amssymb}
+\usepackage[math,fonts=false]{mh_basic}
+\input{../Skript/definitions.tex}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}
+  Sei $\C$ der $(7,4)$-Hamming-Code. Bestimmen Sie für die bei Übertragung aus dem BSC erhaltenen Signale $y^1 = (1,1,0,0,1,1,0)$, $y^2=(1,1,1,0,1,1,0)$, und $y^3 = (1,1,1,1,1,1,0)$ jeweils das ML-Codewort.
+\end{exercise}
+\begin{exercise}
+  \begin{enumerate}
+     \item Beweisen Sie, dass es keinen $(7,3)$-Code mit Minimaldistanz $5$ gibt.
+     \item \emph{(Für Ambitionierte!)} Beweisen Sie, dass es keinen $(90,78)$-Code mit Minimaldistanz $5$ gibt.
+   \end{enumerate}
+   \emph{Hinweis zu b):} Rechnen Sie nach, dass die Kugelpackungsgleichung erfüllt ist. Angenommen es gäbe einen solchen Code $\C$; oBdA (Translationsinvarianz des Hamming-Abstands) liegt der Nullvektor in $\C$. Betrachten Sie $V = \{v∈\GF(2)^{90}\colon v_1 = v_2 = 1, \w(v) = 3\}$ und $M = \{x∈\C\colon x_1 = x_2 = 1, \w(c) = 5\}$. Berechnen Sie
+   \[ \abs{\{ (v, x) ∈ V×M\colon ⟨v,x⟩ = 1\}}\]
+   sowohl über $\sum_{v∈V} \abs{\{x∈M\colon ⟨v,x⟩=1\}}$ als auch über $\sum_{x∈M} \abs{\{v∈V\colon ⟨v,x⟩=1\}}$.
+\end{exercise}
+
+\begin{exercise}
+  Sei $\C$ ein linearer $(N,K)$-Blockcode. Durch \emph{Erweiterung} von $\C$ erhalten wir einen Code $\hat\C$ der Länge $N+1$, indem wir an jedes Codewort $x=x_1\dotsm x_N∈\C$ ein zusätzliches Bit $x_{N+1}$ anhängen, so dass $\sum_{i=1}^{N+1} x_i = 0$ erfüllt ist. Zeigen Sie:
+  \begin{enumerate}
+    \item $\hat\C$ ist ein linearer $(N+1,K)$-Code. Bestimmen Sie dazu eine Kontrollmatrix $\hat H$ von $\hat\C$, ausgehend von der Kontrollmatrix $H$ von $\C$.
+    \item Ist $\d(\C)$ ungerade, so gilt $\d(\hat\C) = \d(\C) + 1$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Sei $\C$ ein linearer $(N,K)$-Code. Zeigen Sie:
+  \begin{enumerate}
+    \item $\(\C^⊥\)^⊥ = \C$.
+    \item Ist $G$ eine Generatormatrix der Form $G=(I_K\;M)$, wobei $I_n$ für $n∈ℕ$ die $n×n$-Einheitsmatrix ist, dann ist $H = (M^T\; I_{N-K})$ eine Kontrollmatrix für $\C$.
+    \item Wie lässt sich die Bedingung aus b) bei beliebigem $G$ herstellen?
+  \end{enumerate}
+\end{exercise}
+\end{document}

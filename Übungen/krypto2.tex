@@ -1,0 +1,177 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Kryptographie,
+  lectureshort = Kryptographie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {27.4.2015, 12:00 Uhr},
+  date  = {21.4.2015},
+  lecturer     = Carolin Torchiani,
+  operator     = Michael Helmling,
+  %homepage     = www.google.de,
+  sheetnumber  = 2,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+
+\usepackage[math,fonts=false]{mh_basic}
+
+
+\begin{document}
+\maketitle
+
+\inclass
+\begin{exercise}[title = Gruppen]
+ \begin{enumerate}
+  \item Sei $n \in \N$. Beweisen Sie, dass $n\Z = \{nk \mid k \in \Z\}$ eine Untergruppe von $\Z$ ist.
+   \item Seien $(G_1, \circ)$ und $(G_2, *)$ Gruppen und sei $f: G_1 \rightarrow G_2$ ein Gruppenhomomorphismus. Beweisen Sie, dass das Urbild des neutralen Elements von $G_2$ eine Untergruppe von $G_1$ ist. 
+  \item $\mathbb S_4$ ist die Gruppe der bijektiven Abbildungen $\{1, 2, 3, 4\} \rightarrow \{1, 2, 3, 4\}$. Zeigen Sie, dass die Untergruppe
+  \[U = \left\langle \begin{pmatrix} 1 & 2 & 3 & 4 \\ 2 & 3 & 4 & 1 \end{pmatrix} \right\rangle \subset \mathbb S_4\] 
+  zyklisch ist mit Ordnung $4$. Geben Sie einen Isomorphismus zu $\Z_4$ an.
+%   \item Sei $H$ eine zyklische Gruppe von Primzahlordnung und $h \in H$ beliebig. Bestimmen Sie die von $h$ erzeugte Untergruppe.
+ \end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[title = Teilbarkeit]
+ \begin{enumerate}
+  \item Wie viele Elemente hat $\Z_{36}^*$?
+  \item Bestimmen Sie alle Elemente von $\Z_{36}^*$ (anders ausgedrückt: alle Einheiten von $\Z_{36}$) und alle Nullteiler von $\Z_{36}$.
+  \item Sei $R$ ein endlicher kommutativer Ring mit Eins. Beweisen Sie: Jedes Element von $R$ ist Einheit oder Nullteiler. (Gilt die Aussage auch, wenn $R$ undendlich viele Elemente besitzt?) 
+ \end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[title = Euklidischer Algorithmus]
+ \begin{enumerate}
+  \item Berechnen Sie einen größten gemeinsamen Teiler von $588$ und $315$. Stellen Sie ihn als Linearkombination von $588$ und $315$ dar.
+  
+  \item Berechnen Sie das Inverse von $[19]$ in $\Z_{36}^*$.
+  \item Lösen Sie, falls möglich, die folgenden Kongruenzgleichungssysteme in $\Z$:
+ \begin{enumerate}[columns = 2]
+  \item $3x \equiv \; 7 \mod 16$
+  \item $4x \equiv \; 7 \mod 16$
+ \end{enumerate}
+ \end{enumerate}
+\end{exercise}
+% 
+% \begin{exercise}[title = Kongruenzgleichungssysteme]
+% Lösen Sie, falls möglich, die folgenden Kongruenzgleichungssysteme in $\Z$:
+%  \begin{enumerate}[columns = 3]
+%   \item \begin{align*} 
+%          3x \equiv & \; 7 \mod 16
+%         \end{align*}
+%   \item \begin{align*} 
+%          4x \equiv & \; 7 \mod 16
+%         \end{align*}
+%  \item \begin{align*}
+% 	  x \equiv & \; 5 \mod 81 \\
+% 	  x \equiv & \; 7 \mod 11
+%        \end{align*}
+%  \end{enumerate}
+% \end{exercise}
+
+% 
+% \begin{exercise}[title = Polynomring]
+%   Sei $R$ ein kommutativer Ring mit Eins. Ein \emphex[Polynom]{Polynom in einer Variablen über $R$} ist ein Ausdruck der Form
+%  \[a_nt^n + a_{n-1}t^{n-1} + \dotsc + a_1t +a_0\]
+%  mit \emph{Koeffizienten} $a_n$, \dots, $a_0 \in R$ und $n \in \N$. Wir fassen dabei $t$ als \emphex{formale Variable} auf. (Natürlich könnte man hier auch jeden anderen Buchstaben als formale Variable wählen.) Wir definieren $R[t]$ als die Menge aller Polynome über $R$. 
+%  
+%  Sind $f = \sum_{k=0}^{n_f} a_kt^k$ und $g = \sum_{k_0}^{n_g} b_kt^k$ Polynome, so definieren wir ihre Summe $f+g$ und ihr Produkt $f \cdot g$ als die Polynome
+%  \begin{equation}
+%  \begin{aligned}
+%   && f + g & := \sum_{k = 0}^{n_f} (a_k + b_k) t^k \\
+%   &\text{und} & f \cdot g& := \sum_{m = 0}^{n_f + n_g} \left(\sum_{k + l = m} a_k + b_l \right) t^m, 
+%  \end{aligned}
+%  \end{equation}
+%  wobei $t^0 \in R[t]$ mit $1 \in R[t]$ identifiziert wird.
+%  
+%  Beachten Sie, dass die Multiplikation von Polynomen genauso eingeführt wurde, wie man es erwarten würde, wenn man diese formalen Summen naiv ausmultipliziert; dann wäre nämlich
+%   \begin{align}
+%    \left(\sum_{k=0}^{n_f} a_kt^k\right) \cdot \left(\sum_{l = 0}^{n_g} b_lt^l\right) & = (a_0 + a_1t + a_2t^2 + \dotsc) \cdot (b_0 + b_1t + b_2t^2 + \dotsc) \\
+%    & = a_0b_0 + (a_0b_1 + a_1b_0)t + (a_0b_2 + a_1b_1 + a_2b_0)t^2 + \dotsc \\
+%    & = \sum_{m = 0}^{n_k + n_l} \left(\sum_{k + l = m} a_k + b_l \right) t^m,
+%   \end{align}
+%  was genau die obige Definition ist. 
+%  
+%  Ist $K$ ein Körper, so ist $K[t]$ ein sogenannter euklidischer Ring. Damit ist der Begriff eines \enquote{größten gemeinsamen Teilers} zweier Polynome definiert und der (erweiterte) euklidische Algorithmus kann zur Berechnung verwendet werden. 
+%  
+%  \begin{enumerate}
+%   \item Wir betrachten den Polynomring $\Q[t]$. 
+%   \begin{enumerate}
+%   \item Berechnen Sie $(3t^3 + 5t + 1) \cdot (5t^2 + 4)$.
+%   \item Berechnen Sie den größten gemeinsamen Teiler von $f = t^4 - 1$ und $g = 3t^3 + 4t^2 + 3t + 4)$. Stellen Sie ihn in der Form $af + bg$ mit $a, b \in \Q[t]$ dar.
+%   \end{enumerate}
+%   \item Nun betrachten wir den Polynomring $\Z_2[t]$. 
+%   \begin{enumerate}
+%   \item Berechnen Sie $(t^2 + t + 1) \cdot (t^4 + t + 1)$.  
+%   \item Bestimmen Sie einen größten gemeinsamen Teiler von $f = t^5 + t + 1$ und $g = t^4 + t^2 + 1$. Stellen Sie ihn in der Form $af + bg$ mit $a, b \in \Z_2[t]$ dar.
+%  \end{enumerate}
+%  \end{enumerate}
+% \end{exercise}
+\takehome
+
+\begin{exercise}[title = Schwächen der Enigma]
+ Bestimmen Sie den prozentualen Anteil der Permutationen auf einem Alphabet der Länge $26$, die involutorisch und fixpunktfrei sind. 
+ 
+ Zur Erinnerung: Eine Permutation $\sigma \in \mathbb S(M)$ der Menge $M$ ist eine bijektive Abbildung $\sigma: M \rightarrow M$. Sie heißt involutorisch, falls $\sigma^2(m) = m$ für alle $m \in M$ gilt, und fixpunktfrei, wenn $\sigma(m) \neq m$ für alle $m \in M$ erfüllt ist.
+\end{exercise}
+
+
+\begin{exercise}[title = Vigenère-Chiffre]
+ Modellieren Sie die Vigenère-Chiffre als Kryptosystem.
+\end{exercise}
+
+\begin{exercise}[title = Verschlüsselungsfunktionen]
+ Zeigen Sie, dass die Verschlüsselungsfunktionen $E_e\colon \mathcal P \rightarrow \mathcal C$ eines Kryptosystems injektiv sind.
+\end{exercise}
+
+\begin{exercise}[title = Satz von Bayes]
+\begin{enumerate}
+ \item Seien $(\Omega, P)$ ein Wahrscheinlichkeitsraum und $X\colon \Omega \rightarrow \mathcal A_X$ und $Y\colon \Omega \rightarrow \mathcal A_Y$ zwei Zufallsvariablen. Zeigen Sie:
+ \begin{enumerate}
+  \item Satz von Bayes:
+  \[P_{X|Y \in S}(T) = P_{Y|X \in T}(S) \frac{P_X(T)}{P_Y(S)}\]
+  für alle Ereignisse $T \subseteq \mathcal A_X$, $S \subseteq \mathcal A_Y$ mit $P_X(T), P_Y(S) > 0$. 
+  \item $X$ und $Y$ sind genau dann unabhängig, wenn für alle $T \subseteq \mathcal A_X$ und $S \subseteq \mathcal A_Y$ gilt:
+  \[P_Y(S) = 0 \text{ oder } P_{X|Y \in S}(T) = P_X(T).\]
+ \end{enumerate}
+\item Bei Joe wird ein Test auf eine gefährliche Krankheit durchgeführt. $1\%$ der Bevölkerung in Joes Alter mit vergleichbarer Lebensführung leidet an der Krankheit. In $95\%$ der Fälle ergibt der Test für erkrankte Personen ein positives Ergebnis, in $95\%$ der Fälle ergibt der Test für gesunde Personen ein negatives Ergebnis. Joe erhält ein positives Testergebnis. Mit welcher Wahrscheinlichkeit ist er tatsächlich krank? 
+
+Einige Tipps zur Vorgehensweise: Die Ergebnismenge ist $\Omega = \{(a, b)\,|\,a, b \in \{0, 1\}\}$, ein Ergebnis $(a,b) \in \Omega$ wird dabei wie folgt interpretiert:
+\begin{center}
+\begin{tabular}{lllll}
+ $a = 0$ & Joe ist gesund. & \quad &$b = 0$ & Der Test ist negativ. \\
+ $a = 1$ & Joe ist krank. & \quad &$b = 1$ & Der Test ist positiv.  
+\end{tabular}
+\end{center}
+Auf $\Omega$ sind zwei Zufallsvariablen definiert, nämlich $A\colon \Omega \rightarrow \{0, 1\}$, $(a, b) \mapsto a$, und $B\colon \Omega \rightarrow \{0, 1\}$, $(a, b) \mapsto b$. Die Zufallsvariable $A$ gibt über den Krankheitszustand Auskunft, $B$ über das Testergebnis. Die Verteilungen $P: \Omega \rightarrow [0, 1]$, $P_A: \{0, 1\} \rightarrow [0, 1]$ und $P_B: \{0, 1\} \rightarrow [0, 1]$ seien durch die oben im Text angegebenen Prozentzahlen gegeben.
+
+\begin{enumerate}
+\item Bestimmen Sie Wahrscheinlichkeiten $P_A(a)$ für $a =0, 1$. 
+\item Bestimmen Sie die bedingten Wahrscheinlichkeiten $P_{B|A =a}(b)$ für $a, b \in \{0, 1\}$.
+\item Bestimmen Sie $P(a, b)$ in Abhängigkeit von $P_A(a)$ und $P_{B|A = a}(b)$ für $a, b \in \{0, 1\}$.
+\item Bestimmen Sie $P_{A| B = 1}(1)$ mit dem Satz von Bayes.
+\end{enumerate}
+ \end{enumerate}
+\end{exercise}
+% 
+% \begin{exercise}[title = Zufallsvariablen]
+% \begin{enumerate}
+%  \item Was trifft zu: Wenn $X$ und $Y$ unabhÃ€ngige Zufallsvariablen sind, dann gilt:
+% \begin{itemize}
+% \item[a)]  $ P((X \in A) \cap (Y \in B)) = P(X \in A ) + P(Y \in B) $ \antwbox % falsch
+% \item[b)]  $ P((X \in A) \cup (Y \in B)) = P(X \in A ) + P(Y \in B) $ \antwbox % falsch
+% \item[c)]  $ P((X \in A) \cup (Y \in B)) = P(X \in A ) + P(Y \in B)  
+%             - P((X \in A) \cap (Y \in B)) $ \antwbox % richtig
+% \item[d)]  $ P((X \in A) \cap (Y \in B)) = P(X \in A ) \cdot  P(Y \in B) $ \antwbox % richtig
+% \item[e)]  $ P((X \in A) \cup (Y \in B)) = P(X \in A ) \cdot P(Y \in B) $ \antwbox  % falsch
+% \end{itemize}
+% \item bla
+% \end{exercise}
+
+
+\end{document}

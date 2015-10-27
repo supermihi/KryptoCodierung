@@ -1,0 +1,72 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Kryptographie,
+  lectureshort = Kryptographie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {01.06.2015, 12:00 Uhr},
+  date  = {02.06.2015},
+  lecturer     = Carolin Torchiani,
+  operator     = Michael Helmling,
+  %homepage     = www.google.de,
+  sheetnumber  = 6,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+
+
+
+\usepackage[math,fonts=false]{mh_basic}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\GF}{\operatorname{GF}}
+
+\begin{document}
+\maketitle
+% 
+%  \begin{exercise}[title = Implementierung ElGamal-Kryptosystem]
+%   Implementieren Sie das ElGamal-Kryptosystem. Gehen Sie davon aus, dass der öffentliche Schlüssel $(q, g, g^a \mod q) \in \mc K_E$ und der zugehörige private Schlüssel $(q, g, a) \in \mc K_D$ gegeben sind.
+%  \end{exercise}
+
+ \begin{exercise}[title = ElGamal-Kryptosystem]
+  \begin{enumerate}
+   \item Alice erhält den mit dem ElGamal-Kryptosystem verschlüsselten Chiffretext $(13, 12) \in \mc C$. Ihr öffentlicher Schlüssel ist $(19, 2, 7) \in \mc K_E$. Wie lautet der Klartext?
+   \item Das ElGamal-System funktioniert nicht nur (wie im Skript beschrieben) auf der zyklischen Gruppe $\Z_q^{\times}$ mit $q \in \mathbb P$, sondern auch auf anderen endlichen zyklischen Gruppen. 
+   \begin{enumerate}
+   \item Beschreiben Sie das ElGamal-System aufbauend auf der zyklische Gruppe $(\Z_n, +)$, $n \in \N$. Zeigen Sie, dass zu jeder Verschlüsselungsfunktion eine Entschlüsselungsfunktion existiert. 
+   \item Ist es sinnvoll, das ElGamal-System aufbauend auf der Gruppe $(\Z_n, +)$ zu nutzen?
+   \end{enumerate}
+%    \item Für das ElGamal-System sei eine Gruppe $\langle g \rangle = \Z_q^{\times}$ mit $q \in \mathbb P$ festgelegt, so dass zur Erzeugung eines Schlüssels $(q, g, g^a \mod q) \in \mc K_E$ nur noch der Exponent $a \in \{2, \dots, q-2\}$ gewählt werden muss. Ist die resultierende Version des ElGamal-Kryptosystems perfekt sicher?
+  \end{enumerate}
+ \end{exercise}
+\begin{solution}
+ Der private Schlüssel ist $(19, 2, 6) \in \mc K_D$. Der Klartext ist $8 \in \mc P$. $b$ ist $5$. 
+\end{solution}
+
+ 
+ \begin{exercise}[title = Primzahltests]
+  \begin{enumerate}
+   \item Bestimmen Sie einen Fermat-Zeugen gegen die Primalität von $21$.
+%    \item Zeigen Sie, dass jede Fermat-Zahl $F_n = 2^{2^n} + 1$, $n \in \N$, eine Pseudoprimzahl zur Basis $2$ ist.
+   \item Bestimmen Sie alle Miller-Rabin-Zeugen gegen die Primalität von $21$. 
+  \end{enumerate}
+ \end{exercise}
+
+
+ \begin{exercise}[title = Primzahlerzeugung]
+Entwickeln Sie aufbauend auf dem Miller-Rabin-Test einen probabilistischen Algorithmus zur Erzeugung zufälliger Primzahlen $q \in \mathbb P$. Der Algorithmus soll folgende Eingabe haben:
+ \begin{itemize}
+ \item Länge der Binärdarstellung $\operatorname{size}(q) \in \N$
+ \item obere Schranke $p \in (0, 1]$ für die Fehlerwahrscheinlichkeit, mit der die erzeugte Zahl $q$ keine Primzahl ist 
+ \end{itemize}
+ Implementieren Sie den entwickelten Algorithmus.
+ \end{exercise}
+
+ 
+\end{document}

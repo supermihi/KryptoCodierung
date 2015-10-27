@@ -1,0 +1,71 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Kryptographie,
+  lectureshort = Kryptographie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {11.05.2015, 12:00 Uhr},
+  date  = {12.05.2015},
+  lecturer     = Carolin Torchiani,
+  operator     = Michael Helmling,
+  %homepage     = www.google.de,
+  sheetnumber  = 4,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+
+
+
+\usepackage[math,fonts=false]{mh_basic}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+\newcommand{\mc}{\mathcal}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}[title = Diffusion affin linearer Blockchiffren]
+ Konzipieren Sie eine Verschlüsselungsfunktion einer affin linearen Blockchiffre der Blocklänge $4$ auf $\Z_3$, die folgende Eigenschaft erfüllt:
+ \begin{enumerate}
+  \item Der erste Buchstabe des Klartexts $p = (p_1, \dots, p_4) \in \Z_3^4$ beeinflusst genau den dritten Buchstaben des Chiffretexts. Anders ausgedrückt: Ändert sich nur (!) der erste Buchstabe des Klartexts, ändert sich nur (!) der dritte Buchstabe des Chiffretexts.
+  \item Der erste Buchstabe des Klartexts $p = (p_1, \dots, p_4) \in \Z_3^4$ beeinflusst jeden Buchstaben des Chiffretexts.
+  \item Jeder Buchstabe des Klartexts $p = (p_1, \dots, p_4) \in \Z_3^4$ beeinflusst jeden Buchstaben des Chiffretexts.
+ \end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[title = Beispiele affin linearer Blockchiffren]
+\begin{enumerate}
+ \item Modellieren Sie die Vigenère-Chiffre mit fester Schlüssellänge $n \in \N$ als affin lineare Blockchiffre. 
+ \item Zeigen Sie, dass Permutationschiffren lineare Blockchiffren sind.
+ \end{enumerate}
+\end{exercise}
+
+\begin{exercise}[title = Knacken affin linearer Blockchiffren]
+ \begin{enumerate}
+  \item Das Alphabet einer linearen Blockchiffre mit Blocklänge $2$ sei $\{A, \dotsc, Z\}$. Es sei außerdem bekannt, dass HAND in FOOT verschlüsselt und der ECB-Mode genutzt wird. Bestimmen Sie die Schlüsselmatrix $A \in \Z_{26}^{2 \times 2}$.
+  \item Implementieren sie einen Algorithmus zum Knacken affin linearer Blockchiffren durch einen Known-Plaintext-Angriff.
+ \end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[title = Verschlüsselungsmodi]
+ \begin{enumerate}
+  \item Wir wählen den Schlüssel $e = ([1], [0], [1], [1]) \in \Z_2^4$, außerdem $c_{0} = ([0], [0], [1], [1]) \in \Z_2^4$ und den Klartext
+  \[p = ([0], [1], [0], [0], \; [0], [1], [0], [0], \; [1], [1], [1], [0],\; [1], [0], [1], [1]) \in \Z_2^{16}.\]
+  Verschlüsseln Sie $p$ mit den Verschlüsselungsmodi ECB-, CBC-, CFB- und OFB-Mode unter Nutzung des Vernam-One-Time-Pads als zugrunde liegender Blockchiffre. 
+ 
+  Nehmen Sie nun an, dass 
+  \[c = ([1], [1], [0], [1], \; [1], [1], [0], [1], \; [0], [0], [1], [0],\; [1], [0], [0], [1]) \in \Z_2^{16}\]
+  mit $e$ und dem ECB-, CBC-, CFB- bzw. OFB-Mode verschlüsselt wurde, wieder mit dem Vernam-One-Time-Pad als Blockchiffre. Bestimmen Sie jeweils den Klartext.  
+%   \item Beschreiben Sie die iterativen Verfahren, mit denen die Verschlüsselungsmodi ECB-, CBC-, CFB- und OFB-Mode entschlüsselt werden können. Gehen Sie davon aus, dass der Entschlüsselungsschlüssel $d \in \mc K$ der zugrunde liegenden Blockchiffre bekannt ist.
+  \item Implementieren Sie die Verschlüsselungsmodi ECB, CBC, CFB und OFB. Nutzen Sie als zugrunde liegende Blockchiffre das bereits implementierte Vernam-One-Time-Pad.
+ \end{enumerate}
+\end{exercise}
+
+\end{document}

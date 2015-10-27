@@ -1,0 +1,64 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Informations- und Codierungstheorie,
+  lectureshort = Codierungstheorie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {15.6.2015},
+  %date  = {9.6.2015},
+  lecturer     = Michael Helmling,
+  operator     = Carolin Torchiani,
+  homepage     = {http://userpages.uni-koblenz.de/~helmling/coding},
+  sheetnumber  = 8,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage{cleveref}
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+
+\input{../Skript/definitions.tex}
+\usepackage[math,fonts=false]{mh_basic}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\GF}{\operatorname{GF}}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}
+  \begin{enumerate}
+    \item Sei $X$ eine Zufallsvariable mit Alphabet $A=\{a,b,c\}$ und $p_a = \num{.1}$, $p_b = \num{.2}$, $p_c=\num{.7}$. Berechnen Sie $P( P_X(X) ∈ [\num{.15}, \num{.5}])$ und
+    \[P\(\abs{\log\frac{P_X(X)}{\num{.2}}} > \num{.05}\)\tp\]
+    \item Seien $X, A$ wie oben und $f\colon A→ℝ$ gegeben durch $f(a)=10$, $f(b)=5$, $f(c)=10/7$. Berechnen Sie $\E[f(X)]$ und $\E[1/P_X(X)]$.
+    \item Sei $X$ eine beliebige Zufallsvariable mit Alphabet $A$. Was ist $\E[1/P_X(X)]$?
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}[title=Zipf'sches Gesetz]
+  Seien $a_1,\dotsc, a_n$ die Buchstaben einer Sprache (\zB Deutsch), absteigend sortiert nach der Häufigkeit ihres Auftretens. Das \emph{Zipf'sche Gesetz} besagt, dass die Häufigkeit von $a_i$ ungefähr proportional zu $1/i$ ist.
+  \begin{enumerate}
+    \item Stellen Sie eine Formel für die Häufigkeit von $a_i$ auf.
+    \item Berechnen Sie die Entropie eines zufälligen Buchstabens der deutschen Sprache ausgehend von der Annahme, dass das Zipf'sche Gesetz exakt zutrifft. Berücksichtigen Sie dabei nur die $26$ Buchstaben des lateinischen Alphabets.
+    \item Das Gesetz gilt auch für die \emph{Wörter} einer Sprache. Berechnen Sie die Entropie eines zufälligen deutschen Wortes. Gehen Sie von etwa \num{500000} Wörtern aus und nehmen Sie einen Computer zu Hilfe!
+    \item Ein deutsches Wort ist im Schnitt etwa \num{5,3} Buchstaben lang. Um wie viel kürzer könnte es bei Shannon-Codierung sein?
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Zeigen Sie durch Konstruktion passender Beispiele, dass die beiden Abschätzungen in Satz~5.17 scharf sind:
+  \begin{enumerate}
+    \item Es gibt eine Quelle $(A,X)$ und einen passenden Präfixcode $E$, so dass $H(X) = l_E$ gilt.
+    \item Für jedes $ε>0$ gibt es eine Quelle $(A,X)$ und einen Shannon-Code $E$, so dass $l_E ≥ H(X) + 1 - ε$ gilt.
+  \end{enumerate}
+\end{exercise}
+\end{document}

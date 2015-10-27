@@ -1,0 +1,122 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Kryptographie,
+  lectureshort = Kryptographie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {20.4.2015, 12:00 Uhr},
+  lecturer     = Carolin Torchiani,
+  operator     = Michael Helmling,
+  %homepage     = www.google.de,
+  sheetnumber  = 1,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage[math]{mh_basic}
+
+\begin{document}
+\maketitle
+Alle Klartexte, Chiffretexte und die Permutation können Sie hier herunterladen: 
+\begin{quote}
+\url{http://uni-koblenz.de/~torchiani/krypto/} 
+\end{quote}
+Gehen Sie bei allen Verschlüsselungsverfahren davon aus, dass Groß- und Kleinbuchstaben gleich verschlüsselt werden und dass Zahlen, Leerzeichen und Sonderzeichen unverändert bleiben.
+
+
+\begin{exercise}[title=Caesar-Verschlüsselung]
+ \begin{enumerate}
+  \item Implementieren Sie die Caesar-Verschlüsselung.
+  \item Entschlüsseln Sie den folgenden Caesar-verschlüsselten Text:
+  
+  \begin{quote}\small\begin{sloppypar}\begin{hyphenrules}{nohyphenation}
+  \textsf{QRE ANZR QRE PNRFNE-IREFPUYÜFFRYHAT YRVGRG FVPU IBZ EÖZVFPURA SRYQUREEA TNVHF WHYVHF PNRFNE NO, QRE ANPU QRE ÜOREYVRSREHAT QRF EÖZVFPURA FPUEVSGFGRYYREF FHRGBA QVRFR NEG QRE TRURVZRA XBZZHAVXNGVBA SÜE FRVAR ZVYVGÄEVFPUR XBEERFCBAQRAM IREJRAQRG UNG. QNORV ORAHGMGR PNRFNE RVAR IREFPUVROHAT QRF NYCUNORGF HZ QERV OHPUFGNORA.}
+  \end{hyphenrules}
+  \end{sloppypar}
+  \end{quote}
+ 
+  Schreiben Sie dazu ein Programm, mit dem Caesar-verschlüsselte Texte dechiffriert werden können.
+ \end{enumerate}
+\end{exercise}
+
+\begin{exercise}[title=Monoalphabetische Verschlüsselung]
+ \begin{enumerate}
+  \item Verschlüsseln Sie den Text
+  \begin{quote}
+  \textsf{Klassische Beispiele für monoalphabetische Substitutionen sind die Caesar-Verschlüsselung und das Playfair-Verfahren. Im Gegensatz zur monoalphabetischen Substitutionen stehen die polyalphabetischen Substitutionen, bei denen zur Verschlüsselung mehrere (viele) verschiedene Alphabete verwendet werden.}
+  \end{quote}
+  
+  monoalphabetisch mit der folgenden Permutation:
+  \begin{center}
+  \setlength{\tabcolsep}{4pt}
+  \textsf{
+  \begin{tabular}{l|cccccccccccccccccccccccccc}
+   \textnormal{Klartext} & a & b & c & d & e & f & g & h & i & j & k & l & m & n & o & p & q & r & s & t & u & v & w & x & y & z \\
+   \hline
+   \textnormal{Chiffretext} & y & u & o & h & j & d & b & l & z & v & x & c & f & s & p &  m & g & t & e & r & a & i & n & k & q & z
+  \end{tabular}
+ }
+  \end{center}
+  Implementieren Sie dazu die monoalphabetische Verschlüsselung für beliebige Permutationen.
+  \item Entschlüsseln Sie den monoalphabetisch verschlüsselten Text
+  
+  \begin{quote}\small\begin{sloppypar}\begin{hyphenrules}{nohyphenation}
+    \textsf{XCYEEZEOLJ UJZEMZJCJ DÜT FPSPYCMLYUJRZEOLJ EAUERZRARZPSJS EZSH HZJ OYJEYT-IJTEOLCÜEEJCASB ASH HYE MCYQDYZT-IJTDYLTJS. ZF BJBJSEYRZ ZAT FPSPYCMLYUJRZEOLJS EAUERZRARZPSJS ERJLJS HZJ MPCQYCMLYUJRZEOLJS EAUERZRARZPSJS, UJZ HJSJS ZAT IJTEOLCÜEEJCASB FJLTJTJ (IZJCJ) IJTEOLZJHJSJ YCMLYUJRJ IJTNJSHJR NJTHJS.
+    }
+    \end{hyphenrules}\end{sloppypar}\end{quote}
+  
+  Schreiben Sie dazu ein Programm, um monoalphabetisch verschlüsselte deutsche Texte zu knacken.
+ \end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}[title=Vigenère-Verschlüsselung]
+ \begin{enumerate}
+  \item Nutzen Sie die Vigenère-Verschlüsselung und den Schlüssel \textsf{KRYPTOGRAPHIE}, um den Text
+  
+  \textsf{Dem britischen Mathematiker Charles Babbage gelang um das Jahr achtzehnhundertvierundfuenfzig erstmals die Entzifferung einer Vigenere-Chiffre.} 
+  
+  zu verschlüsseln. Implementieren Sie dazu die Vigenère-Verschlüsselung für beliebige Schlüsselwörter.
+  \item Entschlüsseln Sie den folgenden Vigenère-verschlüsselten Text. Tipp: Die Schlüssellänge ist vier.
+  
+  \begin{quote}\small\begin{sloppypar}\begin{hyphenrules}{nohyphenation}
+  \textsf{VCT DAATVWLT-DWLHKZFJMKMTTMHV OWBI IMZ SMF ZGIFTDMKCHKZYG LAJAWEUIMF OCL CLNXLIVZSZ QTSCHM VY KQYYCMJY OCJOTKC. MXM TYGCZN PCX XTU HLXVRCE LWL EWDSPTHBPJWNXAUBT AMVHBANJBAIC. LSVTQ OYGLWH XU YYVMFMPBR TJZ EICWSFEPSVTBAMRPWH HCTMIQLOIQGH CQUBI MAH VMZYXULYMBSFEPSVTB NYGEWHSML, MDVVYGV EYWZWLT. EAY KQWFT CFX LMDWWM SFEPSVTBW ATVMNOB OYGLWH LQJX SCJWW MAH HKZFJMKMTTOIGB TYHBAGBB. WHIALUCLWH XAL XXM NCVMFYGM-NYGAUBACWMHMDOCO AG HMUBOMZHIMF DPPJBJVVYGB MHS OSFI TSHVM SFH AAWWMJ. YGAL CB RSBG IUBIHWBCPMHSMJNKQWLJVVZJMFZOQY ATTSHV MK WWIJFTA TUQJSAT MJMIUSFH LAY TVLTXNXYGCFA TQFYG DAATVWLT-KZCUNJY. SI VCTA SVTZ FCRPL ITNXYCBDCRP YYBIUBI EMLSM, YCCO VYG XJYJAKCHKZY DNXCOQWL UZAYSZAWW SSMXACC BQL MTQFYG TGYHCFA XU BUWZ SWWBRYWVZOCLWLILJYXCFXHMUBOQY CC LAY VMKWWQUBIM WCC.}
+  \end{hyphenrules}\end{sloppypar}\end{quote}
+
+  \item Entschlüsseln Sie den folgenden Vigenère-verschlüsselten Text (ohne Kenntnis der Schlüssellänge).
+  
+\begin{quote}\small\begin{sloppypar}\begin{hyphenrules}{nohyphenation}
+  \textsf{JCX BCZKHXXY-OKLLIBEAYLYYEAHZ MYAZ UNL XXT ZKGHSUYLOMVNYK JCIRIFGNXT OGJ EKEJMUAKGZ URUBYY WK PBMYGKLX FOKAYVQ. MBK VXXOAZ UNL XXS JKOHSOJ WKL IUFRGFINUUKNBYWAK MNHMMONNZCHT. XTHYB CYKJYG OG ZKAXTMTZT SAL FUHHGFINUUKNBYWAKH LAVLZCMANBUH GOWAZ YBT AXNYBSNXDNTRJAGVXZ PXXQXTXXZ, MHTXXXH FKBKKLX. CCX BCXRY NTX PKFVNY TRJAGVXZY ZKHNZTM CYKJYG CCKJ XNXWA KCG YWAROXYMXRQHXN UKMMOGFZ. YGZMMGHWKH BYN WOY OOAXTYKK-PXXMVNFNKMLKFNTA BS MXIBSKBGZYG PUAXBNTXXXN NTX ZGFM RUGMY TRM LOWAKL. XXMM OG CGBK GWAZTXNHAAHWKLMBCXXOGJZNKHYFCZ MYEGHZ KM VNUKRYL HUUHUZK YKYNFGFL JCX KHMFCYLYKAHZ KCGKL OOAXTYKK-WAOZYXY. WG XBKM THYK TCVNN HKZYKHMRCVN AXSUVNN PALWK, ABTA WKL IXYNYMBYWAK IYLCSOYK LLBKXKOWA QULOMDO GBZ MXOHXX FHKMNTA BS DTNL TIBMFYATBNTXXXNWXYBAHWYYVNTBM CG JCX MYLIBBIBMK YBT.
+  }
+  \end{hyphenrules}\end{sloppypar}\end{quote}
+ \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+ Schlüsselwörter \texttt{POLY} und \texttt{KASIKI}.
+\end{solution}
+
+% \begin{exercise}[title=Lemma of Zorn,points=100]
+% With \verb|\begin{enumerate}[columns=<n>]| you can create multicolumn subexercise lists for small exercises:
+% \begin{enumerate}[columns=3]
+%   \item $1+2\alpha xyz \sum\mathbb{R}\mathcal{P}\int_5^x$
+%   \item $2+3$
+%   \item $3+4$
+%   \item $4+5$
+%   \item $5+6$
+% \end{enumerate}
+% If you ever feel the need, a manual column break can be inserted with \verb|\columnbreak|.
+% \end{exercise}
+% 
+% \begin{solution}
+% Solutions are output if the option \verb|solution| (or \verb|solution=true|) is passed to \verb|\exerciseSetup|.
+% \begin{enumerate}
+% \item 3
+% \end{enumerate}
+% \end{solution}
+
+
+\end{document}

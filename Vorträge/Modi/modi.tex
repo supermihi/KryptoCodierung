@@ -1,0 +1,363 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{array}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+% \usepackage{xcolor}
+
+\usepackage{algorithmicx}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+
+\usepackage{textpos}
+\usepackage{color}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning, decorations.pathmorphing}
+
+\setbeamertemplate{bibliography item}[triangle]
+
+\renewcommand{\atop}[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+
+\setbeamerfont{quote}{shape=\upshape,family=\rmfamily}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\mb}{\mathbf}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Sy}{\mathcal{S}}
+\newcommand{\tb}[1]{{\textcolor{blue}{#1}}}
+\newcommand{\tred}[1]{{\textcolor{red}{#1}}}
+\newcommand{\Nk}{\operatorname {Nk}}
+\newcommand{\Nr}{\operatorname {Nr}}
+\newcommand{\expand}{\texttt{KeyExpansion}}
+\newcommand{\size}{\operatorname{size}}
+\newcommand{\parf}{\operatorname{par}}
+\newcommand{\GF}{\operatorname{GF}}
+\newcommand{\ol}[1]{[#1]}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Satz}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{expl}[thm]{Beispiel}
+\newtheorem{rem}[thm]{Bemerkung}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{notn}[thm]{Notation}
+
+\usetheme{Boadilla}
+\setbeamertemplate{navigation symbols}{} %Leave out navigation symbols
+ \setbeamertemplate{footline}
+        {
+      \leavevmode%
+      \hbox{%
+      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+        \usebeamerfont{author in head/foot}\insertshortauthor~~(\insertshortinstitute)
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+        \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+
+    %#turning the next line into a comment, erases the frame numbers
+        %\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+
+      \end{beamercolorbox}}%
+      \vskip0pt%
+    }
+    
+    
+\title[Verschlüsselungsmodi]{Verschlüsselungsmodi}
+\subtitle{Von Blockchiffren auf $A^n$ zu Kryptosystemen auf $A^*$}
+\author[Torchiani]{Carolin Torchiani}
+\institute[Uni Koblenz]{\vspace{-0.5cm}\begin{center}
+ \includegraphics[width=27mm]{logo_uni-koblenz}
+\end{center}
+}
+
+\date{Koblenz, 4.\ Mai 2015}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\addtobeamertemplate{frametitle}{~}{%
+\begin{textblock*}{40mm}[0.75, 0.75](\textwidth, 0\textheight)
+\includegraphics[width=27mm]{logo_uni-koblenz}
+\end{textblock*}}
+
+\tikzset{pblock/.style = {draw, rectangle split, rectangle split vertical,
+                      rectangle split parts=2, very thick, fill=blue!20, rounded corners}}
+
+\begin{frame}{Verschlüsselungsmodi}{\ }
+\begin{block}{ }
+Sei $A$ ein Alphabet. Wie konstruiert man aus einer Blockchiffre mit Klartext- und Chiffretextraum $A^n$ ein Kryptosystem mit Klartext- und Chiffretextraum $A^*$?
+\end{block}
+\end{frame}
+
+\begin{frame}{Beispiel}{One-Time-Pad}
+\only<1>{
+\begin{block}{Vom One-Time-Pad auf $\Z_2^4$ zum Kryptosystem auf $\Z_2^*$}
+ \textbf{Gegeben:}
+ 
+ Alphabet \textcolor{orange}{$\Z_2$}, $\mc P = \mc K = \mc C = \tred{\Z_2^4}$, $E_e(p) = p+e \in \Z_2^4$ für alle $p, e \in \Z_2^4$
+ \medskip
+ 
+ z.\,B.\ $E_{(\ol 1, \ol 0, \ol 1, \ol 1)}(\ol 0, \ol 0, \ol 1, \ol 1) = ([1], [0], [0], [0])$
+ 
+
+ \bigskip
+ \textbf{Gesucht:} 
+ 
+ Kryptosystem mit Alphabet $\tred{\Z_2^4}$ und Klar-, Schlüsseltextraum \textcolor{blue}{$(\Z_2^4)^*$}
+ \medskip
+ 
+ z.\,B.\ $E_{(\ol 1, \ol 0, \ol 1, \ol 1)}((\ol 0, \ol 0, \ol 1, \ol 1), (\ol 0, \ol 0, \ol 1, \ol 1), (\ol 0, \ol 0, \ol 1, \ol 1)) \tred{\; = \; ???}$
+\end{block}}
+
+\only<2>{
+\begin{block}{One-Time-Pad}
+ \textbf{Gegeben:}
+ 
+ Alphabet \textcolor{orange}{$\Z_2$}, $\mc P = \mc K = \mc C = \tred{\Z_2^4}$, $E_e(p) = p+e \in \Z_2^4$ für alle $p, e \in \Z_2^4$
+ \medskip
+ 
+ z.\,B.\ $E_{(\ol 1, \ol 0, \ol 1, \ol 1)}(\ol 0, \ol 0, \ol 1, \ol 1) = ([1], [0], [0], [0])$
+ 
+
+ \bigskip
+ \textbf{Gesucht:} 
+ 
+ Kryptosystem mit Alphabet $\tred{\Z_2^4}$ und Klar-, Schlüsseltextraum \textcolor{blue}{$(\Z_2^4)^*$}
+ \medskip
+ 
+ z.\,B.\ $E_{(\ol 1, \ol 0, \ol 1, \ol 1)}((\ol 0, \ol 0, \ol 1, \ol 1,\; \ol 0, \ol 0, \ol 1, \ol 1, \; \ol 0, \ol 0, \ol 1, \ol 1)) \tred{\; = \; ???}$
+\end{block}}
+\end{frame}
+
+\begin{frame}{Verschlüsselungsmodi}{\ }
+ 
+ \begin{block}{Input}
+  Blockchiffre auf dem Alphabet $A = \Z_m$ mit Blocklänge $n \in \N$, d.\,h.\ der \tred{Klar- und Chiffretextraum ist $\Z_m^n$}
+ \end{block}
+
+ \begin{block}{Output}
+ Kryptosystem mit \tred{Alphabet $B = \Z_m^n$} und Klar- und Chiffretextraum $(\Z_m^n)^*$
+ \end{block}
+\pause
+
+\begin{block}{Notation}
+ \begin{itemize}
+  \item $e \in \mc K$ ein Schlüssel aus dem Schlüsselraum der Blockchiffre
+  \item $p_1p_2\dotsc \in \mc P = B^*$ ein Wort, d.\,h.\ $p_i \in B = \Z_m^n$ für alle $i \geq 1$
+  \item \textbf{Konstruktion:} 
+  
+  $E_e(p_1p_2p_3\dotsc) = c_1c_2c_3\dotsc \in \mc C = B^*$ mit $c_i \in B = \Z_m^n$ für alle $i > 1$ 
+ \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{ECB-Mode}{Verschlüsselungsmodi}
+  \begin{footnotesize}
+ \begin{block}{ECB-Mode (electronic codebook)}
+  $c_i := E_e(p_i)$ für alle $i \geq 1$
+ \end{block}
+ \begin{center}
+   \begin{tikzpicture}[scale = 0.7]
+    \tikzstyle{opmode} = [draw, rectangle, minimum width = 1cm]
+    \tikzstyle{la} = [-latex]
+    \tikzstyle{label} = [fill=white]
+    \node[opmode] (pi-1) at (-3, 1) {\footnotesize{$p_{i-1}$}};
+    \node[opmode] (pi) at (0, 1) {\footnotesize{$p_{i}$}};
+    \node[opmode] (pi+1) at (3, 1) {\footnotesize{$p_{i+1}$}};
+    \node[opmode] (ci-1) at (-3, -1) {\footnotesize{$c_{i-1}$}};
+    \node[opmode] (ci) at (0, -1) {\footnotesize{$c_{i}$}};
+    \node[opmode] (ci+1) at (3, -1) {\footnotesize{$c_{i+1}$}};
+    \draw[la] (pi-1) -- node[label] {\scriptsize{Schlüssel $e$}} (ci-1);
+    \draw[la] (pi) -- node[label] {\scriptsize{Schlüssel $e$}} (ci);
+    \draw[la] (pi+1) -- node[label] {\scriptsize{Schlüssel $e$}} (ci+1);
+   \end{tikzpicture}
+ \end{center} 
+\pause
+  \begin{block}{ One-Time-Pad auf $\Z_{26}^3$ als Blockchiffre}
+ \[e = ([10], [8], [4]) \in \Z_{26}^3\]
+ \[p = ([12], [7], [23], \quad [2], [17], [4], \quad [1], [9], [13]) \in \Z_{26}^9\]
+   \begin{align*} E_e(p) = &([12 +10], [7+8], [23+4], \; [2+10], [17+8], [4+4], \; [1+10], [9+8], [13+4]) \\
+   = & ([22], [15], [1], \quad [12], [25], [8], \quad [11], [17], [17]) \in \Z_{26}^9
+   \end{align*}
+   \end{block}
+   \end{footnotesize}
+\end{frame}
+
+\begin{frame}{CBC-Mode}{Verschlüsselungsmodi}
+\begin{footnotesize}
+ \begin{block}{CBC-Mode (cipher-block chaining)}
+ $c_i := E_e(p_i + c_{i-1})$ für alle $i \geq 1$ mit $c_0 \in B$ fest und öffentlich gewählt
+ \end{block}
+\begin{center}
+   \begin{tikzpicture}[scale=0.6]
+    \tikzstyle{opmode} = [draw, rectangle, minimum width = 1cm]
+    \tikzstyle{la} = [-latex]
+    \tikzstyle{label} = [fill=white]
+    \node[opmode] (pi-1) at (-4, 1) {\footnotesize{$p_{i-1}$}};
+    \node[opmode] (pi) at (0, 1) {\footnotesize{$p_{i}$}};
+    \node[opmode] (pi+1) at (4, 1) {\footnotesize{$p_{i+1}$}};
+    \node[opmode] (ci-1) at (-4, -2) {\footnotesize{$c_{i-1}$}};
+    \node[opmode] (ci) at (0, -2) {\footnotesize{$c_{i}$}};
+    \node[opmode] (ci+1) at (4, -2) {\footnotesize{$c_{i+1}$}};
+    \node (oi-1) at (-4, 0) {\small{$\oplus$}};
+    \node (oi) at (0, 0) {\small{$\oplus$}};
+    \node (oi+1) at (4, 0) {\small{$\oplus$}};
+%     \draw (-4, 0) circle (5pt);
+%     \draw (0, 0) circle (5pt);
+%     \draw (4, 0) circle (5pt);
+    \draw[la, shorten >= -3pt] (pi-1) -- (oi-1);
+    \draw[la, shorten >= -3pt] (pi) -- (oi);
+    \draw[la, shorten >= -3pt] (pi+1) -- (oi+1);
+    \draw[la, shorten <= -3pt] (oi-1) -- node[label]  {\scriptsize{Schlüssel $e$}} (ci-1);
+    \draw[la, shorten <= -3pt] (oi) -- node[label]  {\scriptsize{Schlüssel $e$}} (ci);
+    \draw[la, shorten <= -3pt] (oi+1) -- node[label]  {\scriptsize{Schlüssel $e$}} (ci+1);
+    \draw[la, shorten >= -3pt] (-7, -2) -- (-6, -2) -- (-6, 0) -- (oi-1);
+    \draw[la, shorten >= -3pt] (ci-1) -- (-2, -2) -- (-2, 0) -- (oi);
+    \draw[la, shorten >= -3pt] (ci) -- (2, -2) -- (2, 0) -- (oi+1);
+    \draw[la] (ci+1) -- (6, -2);
+   \end{tikzpicture}
+  \end{center}
+  \pause
+  \vspace{-3pt}
+  \begin{block}{One-Time-Pad auf $\Z_{26}^3$ als Blockchiffre}
+ \[e = ([10], [8], [4]) \in \Z_{26}^3, \; c_0 = ([1], [1], [1])\]
+ \[p = ([12], [7], [23], \quad [2], [17], [4], \quad [1], [9], [13]) \in \Z_{26}^9\]
+   \begin{align*} c_1 = E_e(p_1 + c_0) = \;&[([12], [7], [23]) + ([1], [1], [1])] + ([10], [8], [4])& & = ([23], [16], [2]) \\
+   c_2 =  E_e(p_2 + c_1) = \; & [([2], [17], [4]) +  ([23], [16], [2])] + ([10], [8], [4])&& = ([9], [15], [10])\\
+   c_3 = E_e(p_3 + c_2) = \; & [([1], [9], [13]) +  ([9], [15], [10])] + ([10], [8], [4])&& = ([20], [6], [1]) 
+   \end{align*}
+   \end{block}
+   \end{footnotesize}
+\end{frame}
+
+\begin{frame}{CFB-Mode}{Verschlüsselungsmodi}
+\begin{footnotesize}
+  \begin{block}{CFB-Mode (cipher feedback)}
+ $c_i := p_i + E_e(c_{i-1})$ für alle $i \geq 1$ mit $c_0 \in B$ fest und öffentlich gewählt
+ \end{block}
+    \begin{center}
+   \begin{tikzpicture}[scale=0.6]
+    \tikzstyle{opmode} = [draw, rectangle, minimum width = 1cm]
+    \tikzstyle{la} = [-latex]
+    \tikzstyle{label} = [fill=white]
+        \tikzstyle{label} = [fill=white]
+    \node[opmode] (pi-1) at (-4, 1) {$p_{i-1}$};
+    \node[opmode] (pi) at (0, 1) {$p_{i}$};
+    \node[opmode] (pi+1) at (4, 1) {$p_{i+1}$};
+    \node[opmode] (ci-1) at (-4, -2) {$c_{i-1}$};
+    \node[opmode] (ci) at (0, -2) {$c_{i}$};
+    \node[opmode] (ci+1) at (4, -2) {$c_{i+1}$};
+    \node (oi-1) at (-4, 0) {\small{$\oplus$}};
+    \node (oi) at (0, 0) {\small{$\oplus$}};
+    \node (oi+1) at (4, 0) {\small{$\oplus$}};
+    \draw[la, shorten >= -3pt] (pi-1) -- (oi-1);
+    \draw[la, shorten >= -3pt] (pi) -- (oi);
+    \draw[la, shorten >= -3pt] (pi+1) -- (oi+1);
+    \draw[la, shorten <= -3pt] (oi-1) -- (ci-1);
+    \draw[la, shorten <= -3pt] (oi) --  (ci);
+    \draw[la, shorten <= -3pt] (oi+1) -- (ci+1);
+    \draw[la, shorten >= -3pt] (-7, -2) -- (-6, -2) -- node[label] {\scriptsize{Schlüssel $e$}} (-6, 0) -- (oi-1);
+    \draw[la, shorten >= -3pt] (ci-1) -- (-2, -2) -- node[label] {\scriptsize{Schlüssel $e$}} (-2, 0) -- (oi);
+    \draw[la, shorten >= -3pt] (ci) -- (2, -2) -- node[label] {\scriptsize{Schlüssel $e$}} (2, 0) -- (oi+1);
+    \draw[la] (ci+1) -- (6, -2);
+   \end{tikzpicture}
+  \end{center}
+  \pause
+    \vspace{-3pt}
+    \begin{block}{One-Time-Pad auf $\Z_{26}^3$ als Blockchiffre}
+     \[e = ([10], [8], [4]) \in \Z_{26}^3, \; c_0 = ([1], [1], [1])\]
+ \[p = ([12], [7], [23], \quad [2], [17], [4], \quad [1], [9], [13]) \in \Z_{26}^9\]
+   \begin{align*}
+   c_1 = \;& p_1 + E_e(c_{0}) = ([12], [7], [23]) + [([1], [1], [1]) + [10], [8], [4])] &&= ([23], [16], [2]), \\
+   c_2 = \;& p_2 + E_e(c_1) = ([2], [17], [4]) + [([23], [16], [2]) + [10], [8], [4])] &&= ([9], [15], [10]), \\
+   c_3 = \;& p_3 + E_e(c_2) = ([1], [9], [13]) + [([9],[15], [10]) + [10], [8], [4])] &&= ([20], [6], [1]).
+   \end{align*}
+   \end{block}
+   \end{footnotesize}
+  \end{frame}
+  
+  \begin{frame}{OFB-Mode}{Verschlüsselungsmodi}
+\begin{footnotesize}
+  \begin{block}{OFB-Mode (output feedback)}
+$c_i := p_i + s_i$ für alle $i \geq 1$ mit $s_{0} = c_{0}$ und $s_i = E_e(s_{i-1})$ für alle $i \geq 1$   
+ \end{block}
+  \begin{center}
+   \begin{tikzpicture}[scale=0.6]
+    \tikzstyle{opmode} = [draw, rectangle, minimum width = 1cm]
+    \tikzstyle{la} = [-latex]
+        \tikzstyle{label} = [fill=white]
+        \tikzstyle{label} = [fill=white]
+    \node[opmode] (si-1) at (-5, 1) {$s_{i-1}$};
+    \node[opmode] (si) at (0, 1) {$s_i$};
+    \node[opmode] (si+1) at (5, 1) {$s_{i+1}$};
+    \node[opmode] (pi-1) at (-7.5, 0) {$p_{i-1}$};
+    \node[opmode] (pi) at (-2.5, 0) {$p_{i}$};
+    \node[opmode] (pi+1) at (2.5, 0) {$p_{i}$};
+    \node[opmode] (ci-1) at (-5, -1) {$c_{i-1}$};
+    \node[opmode] (ci) at (0, -1) {$c_{i}$};
+    \node[opmode] (ci+1) at (5, -1) {$c_{i+1}$};
+    \node (oi-1) at (-5, 0) {\small{$\oplus$}};
+    \node (oi) at (0, 0) {\small{$\oplus$}};
+    \node (oi+1) at (5, 0) {\small{$\oplus$}};
+    \draw[la, shorten >= -3pt] (pi-1) -- (oi-1);
+    \draw[la, shorten >= -3pt] (pi) -- (oi);
+    \draw[la, shorten >= -3pt] (pi+1) -- (oi+1);
+    \draw[la, shorten >= -3pt] (si-1) -- (oi-1);
+    \draw[la, shorten >= -3pt] (si) -- (oi);
+    \draw[la, shorten >= -3pt] (si+1) -- (oi+1);
+    \draw[la, shorten <= -3pt] (oi-1) -- (ci-1);
+    \draw[la, shorten <= -3pt] (oi) --  (ci);
+    \draw[la, shorten <= -3pt] (oi+1) -- (ci+1);
+    \draw[la] (-9.5, 1) -- node [label] {\scriptsize{Schlüssel $e$}} (si-1);
+    \draw[la] (si-1) -- node [label] {\scriptsize{Schlüssel $e$}} (si);
+    \draw[la] (si) -- node [label] {\scriptsize{Schlüssel $e$}} (si+1);
+    \draw[la] (si+1) -- (6.5, 1);
+     \end{tikzpicture}
+\end{center}
+\pause
+    \begin{block}{One-Time-Pad auf $\Z_{26}^3$ als Blockchiffre}
+     \[e = ([10], [8], [4]) \in \Z_{26}^3, \; c_0 = s_0 = ([1], [1], [1])\]
+ \[p = ([12], [7], [23], \quad [2], [17], [4], \quad [1], [9], [13]) \in \Z_{26}^9\]
+   \begin{align*}
+   c_1 = \;& p_1 + E_e(s_{0}) = ([12], [7], [23]) + [([1], [1], [1]) + [10], [8], [4])] &&= ([23], [16], [2]), \\
+   c_2 = \;& p_2 + E_e(s_1) = ([2], [17], [4]) + [([11], [9], [5]) + ([10], [8], [4])] &&= ([23], [8], [13]), \\
+   c_3 = \;& p_3 + E_e(s_2) = ([1], [9], [13]) + [([21],[17], [9]) + ([10], [8], [4])] &&= ([6], [8], [0]).
+   \end{align*}
+   \end{block}
+   \end{footnotesize}
+  \end{frame}
+  
+  \begin{frame}{Verschlüsselungsmodi}{\ }
+   \begin{center}
+   \begin{block}{}
+    Von der Blockchiffre auf $A^n$ zum Kryptosystem auf $A^*$. \quad \Huge{\textcolor{green}{\checkmark}}
+    \end{block}
+   \end{center}
+
+  \end{frame}
+
+\end{document}
+
+
+

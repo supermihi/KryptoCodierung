@@ -1,0 +1,45 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Kryptographie,
+  lectureshort = Kryptographie, % optional short name for the footer
+  semester     = SS 2015,
+%  deadline     = {20.4.2015, 12:00 Uhr},
+  lecturer     = Carolin Torchiani,
+  operator     = Michael Helmling,
+  %homepage     = www.google.de,
+  sheetnumber  = 0,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage[math]{mh_basic}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}[title=Python installieren]
+Wie angekündigt, werden wir die Programmieraufgaben in der Programmiersprache \emph{Python} lösen. Um sicherzustellen, dass alle die richtige Version (Python 3.4) und die notwendigen Zusatzpakete (IPython, numpy und matplotlib) haben, empfehlen wir Ihnen die Installation von \emph{Anaconda}, einer kostenlosen Software-Zusammenstellung, die alle von uns benötigten Komponenten enthält. Anaconda ist für Windows, Mac und Linux erhältlich. Im Folgenden ist die Installation für Windows beschrieben:
+
+Gehen Sie auf die Seite \url{http://continuum.io/downloads}. Klicken Sie dort auf \emph{I WANT PYTHON 3.4}, um die Python-3.4-Version der Software \emph{Anaconda} herunterzuladen. Achten Sie darauf, \textbf{nicht} die Version für Python 2.7 zu nehmen! Installieren Sie das Programm mit den Standard-Einstellungen.
+\end{exercise}
+
+\textit{Sollten Sie noch nie mit Python oder einer vergleichbaren Programmiersprache gearbeitet haben, empfehlen wir Ihnen, sich mit den beiden Tutorials aus der nächsten Aufgabe zu beschäftigen. Insbesondere das zweite bietet sich auch semesterbegleitend als Nachschlagewerk zu speziellen Themen an!}
+
+\begin{exercise}[title=Erste Schritte mit Python]
+\begin{itemize}
+  \item \emph{Wissenschaftliches Rechnen mit Python3 in 30 Minuten} ist eine interaktive Kurzeinführung in die grundlegende Python-Befehle und -Datenstrukturen, die man am häufigsten im mathematisch"=naturwissenschaftlichen Bereich benötigt. Sie bleibt aber relativ oberflächlich und eignet sich vor allem für einen möglichst schnellen Einstieg.
+  
+  Starten Sie dazu das Programm \emph{IPython Notebook}, das Sie im Startmenü unter dem Eintrag \emph{Anaconda} finden. Daraufhin öffnet sich ein Konsolenfenster sowie eine Seite \emph{IPython Notebook} im Browser.
+
+  Laden Sie dort (Klick auf das hervorgehobene \emph{click here}) die Datei \texttt{pythonWiss30.ipynb}, die Sie hier herunterladen können:
+\begin{quote} \url{http://uni-koblenz.de/~helmling/modsim/pythonWiss30.ipynb} \end{quote}
+Die Datei erscheint dann in der Liste; klicken Sie dort auf \emph{Upload} und anschließend auf den Dateinamen.
+  \item Das offizielle Python-Tutorial (deutsche Übersetzung auf \url{http://py-tutorial-de.readthedocs.org}) behandelt ausführlich die Grundlagen der Python-Programmiersprache. Für unsere Zwecke sind hauptsächlich die Abschnitte 1–6 interessant.
+\end{itemize}
+\end{exercise}
+
+
+\end{document}

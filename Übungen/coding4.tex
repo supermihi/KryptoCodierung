@@ -1,0 +1,76 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Informations- und Codierungstheorie,
+  lectureshort = Codierungstheorie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {29.6.2015},
+  lecturer     = Michael Helmling,
+  operator     = Carolin Torchiani,
+  homepage     = {http://userpages.uni-koblenz.de/~helmling/coding},
+  sheetnumber  = 10,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage{cleveref}
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+\usepackage{amssymb}
+\usepackage[math,fonts=false]{mh_basic}
+\input{../Skript/definitions.tex}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+\usepackage{booktabs}
+\newcommand{\mc}{\mathcal}
+\newcommand{\GF}{\operatorname{GF}}
+\begin{document}
+\maketitle
+
+\begin{exercise}
+  Im Abschnitt \enquote{Blockcodes} werden $K$-Wörter aus der binären Quelle, die wir uns als Ausgang einer Quellencodierung vorgestellt haben, zu $N$-Wörtern codiert. Begründen Sie, warum jedes dieser $K$-Wörter mit gleicher Wahrscheinlichkeit vorkommt, wenn eine \enquote{gute} Quellencodierung gewählt wurde.
+\end{exercise}
+
+\begin{exercise}
+  Zeigen Sie: Die Kapazität des BEC($ε$) ist $1-ε$.
+\end{exercise}
+
+\begin{exercise}
+  \begin{Center}
+  \begin{tikzpicture}[scale=.75]
+        \node (x0) at (0, 0) {$0$};
+        \node (x1) at (0,-2) {$1$};
+        \node (y0) at (2, 0) {$0$} edge[<-] node[above] {$1$} (x0)
+                                   edge[<-] node[below] {$ε$}   (x1);
+        \node (y1) at (2,-2) {$1$} edge[<-] node[below] {$1-ε$} (x1);
+      \end{tikzpicture}
+   \end{Center}
+  Der \emph{Z-Kanal} Z($ε$) mit Ausgabealphabet $\GF(2)$ ist definiert über
+  \[ P_{Z(ε), 0}(y) = \begin{cases} 1&\text{falls }y=0,\\0&\text{sonst}\end{cases} \quad\text{und}\quad P_{Z(ε), 1}(y) = \begin{cases} ε&\text{für } y=0,\\1-ε&\text{sonst.}\end{cases}    \]
+
+  Sei $ε=\num{.15}$ und $P_X(0)=\num{.9}$.
+  \begin{enumerate}
+    \item Berechnen Sie $P_{X∣Y=1}(1)$ und $P_{X∣Y=0}(1)$!
+    \item Berechnen Sie $I(X∥Y)$ und vergleichen Sie das Ergebnis mit dem in Beispiel~5.39 ermittelten Wert für den BSC(\num{.15}) bei derselben Eingangsverteilung.
+    \item Berechnen Sie die Kapazität und die optimale Inputverteilung von Z(\num{.15}) mit Hilfe eines Computers.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Sei $X$ eine Zufallsvariable mit Alphabet $A⊆ℝ$ und Erwartungswert $μ_X=\E[X]$. Zeigen Sie:
+  \begin{enumerate}
+    \item Es gibt mindestens ein $x∈A$ mit $x≤μ_X$.
+    \item Ist $X$ gleichverteilt, $A⊆ℝ_0^+$ und $\abs A$ gerade, gilt $x≤2μ_X$ für mindestens die Hälfte aller $x∈A$.
+  \end{enumerate}
+\end{exercise}
+
+
+
+ 
+\end{document}

@@ -1,0 +1,182 @@
+% !TeX spellcheck = de_DE
+% !TeX program=lualatex
+% !TeX TXS-program:bibliography = txs:///biber
+\documentclass[
+  paper=a4,
+  fontsize=11pt,
+  parskip=half,
+  DIV=10,
+  twoside=true
+]{scrbook}
+
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{
+  graphs, graphdrawing,
+  quotes, babel
+}
+
+\usepackage{tikz}
+% \usetikzlibrary{quotes}
+% \usetikzlibrary{babel}
+\usepackage[
+  fonts=false,
+  prettyref=false,
+  math=true,
+  unimath=true,
+  german,
+]{mh_basic} % download here: https://github.com/supermihi/latex
+\setsansfont{Linux Biolinum O}
+\setromanfont{Linux Libertine O}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+% ====  TiKZ and Color configuration ======
+\usepackage{pgfplots}
+  \pgfplotsset{compat=1.11}
+\usetikzlibrary{calc}
+%\usetikzlibrary{math}
+\usetikzlibrary{intersections}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+%\usetikzlibrary{angles}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,shapes.symbols, shapes.arrows}
+\usetikzlibrary{decorations,decorations.pathreplacing,decorations.pathmorphing}
+\usetikzlibrary{graphs,graphdrawing}
+\usegdlibrary{trees}
+
+\newcommand\ie{i.\,e.\xspace}
+\newcommand\eg{e.\,g.\xspace}
+\colorlet{encoder}{LightSkyBlue!30}
+\colorlet{channel}{Red!30}
+\colorlet{source}{LightGoldenrod}
+% ================================
+
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\SetEnumitemKey{columns}{ %
+  itemsep=1\itemsep, %
+  parsep=1\parsep, %
+  before=\begin{multicols}{\ifstrempty{#1}{2}{#1}}, %
+  after=\raggedcolumns\end{multicols} %
+}
+\usepackage[pdfencoding=auto]{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage{makeidx} % Stichwortverzeichnisse
+\usepackage{marginnote}
+\usepackage{todonotes} 
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+\usepackage[labelformat=simple]{subcaption}
+  \renewcommand\thesubfigure{(\alph{subfigure})}
+
+\usepackage{graphicx} % Bilder einbinden
+
+% einfach Bearbeitung von Theorem-Umgebungen, kein amsthm mehr einbinden!
+\usepackage[thmmarks,amsmath,hyperref]{ntheorem} 
+\usepackage[capitalize,noabbrev]{cleveref}
+  \crefname{equation}{}{}
+  
+\usepackage{xspace}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{qrcode}
+
+\theoremstyle{plain}
+\theorembodyfont{\itshape}
+\theoremsymbol{\ensuremath{\vartriangleleft}}
+\newtheorem{theorem}{Satz}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{conjecture}[theorem]{Vermutung}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{principle}[theorem]{Prinzip}
+
+
+\theorembodyfont{\normalfont}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{defnot}[theorem]{Definition und Notation}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{example}[theorem]{Beispiel}
+\newtheorem{exercise}[theorem]{Aufgabe}
+\newtheorem{question}[theorem]{Frage}
+\newtheorem{reminder}[theorem]{Erinnerung}
+\newtheorem{remark}[theorem]{Bemerkung}
+\newtheorem{remarks}[theorem]{Bemerkungen}
+\newtheorem{construction}[theorem]{Konstruktion}
+\newtheorem{assumption}[theorem]{Annahme}
+\crefname{theorem}{Satz}{Satz}
+\theoremstyle{nonumberplain}
+\theoremseparator{.}
+\theoremheaderfont{\normalfont\bfseries\itshape}
+\theoremsymbol{\ensuremath{_\Box}}
+\newtheorem{proof}{Beweis}
+
+\input{definitions.tex}
+
+\usepackage[style=alphabetic, backend=biber]{biblatex}
+\addbibresource{bibliographie.bib}
+
+
+\floatname{algorithm}{Algorithmus}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt, rotate=45},
+%default radius will be 1pt. 
+cross/.default={1pt}}
+
+\title{Einführung in die Krytographie sowie die Informations- und Codierungstheorie}
+\subtitle{Vorlesungsskript Universität Koblenz, Sommersemester~2015}
+\author{Carolin Torchiani \and Michael Helmling}
+\date{Version vom 27. Oktober 2015}
+
+\makeindex
+
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+\section*{Über dieses Skript}
+Das vorliegende Vorlesungsskript \emph{Einführung in die Kryptographie sowie die Informations- und Codierungstheorie} wurde von Carolin Torchiani\footnote{\href{mailto:carolin.torchiani@posteo.de}{carolin.torchiani@posteo.de}} und Michael Helmling\footnote{\href{mailto:michaelhelmling@posteo.de}{michaelhelmling@posteo.de}} für eine vierstündige Vorlesung erstellt, die im Sommersemester 2015 an der Uni Koblenz für Masterstudenten der Mathematik oder Informatik gehalten wurde.
+
+Wir haben dieses Skript auf Basis verschiedener Quellen von Grund auf neu erstellt, da die ohnehin erstaunlich dünne Auswahl vergleichbarer Skripte kein aus unserer Sicht zufriedenstellendes Gesamtkonzept beinhaltete. Um anderen dieselbe Arbeit zu ersparen bzw.\ zu erleichtern, ist das Skript inklusive der \TeX-Quellen\footnote{siehe \url{https://github.com/supermihi/KryptoCodierung}} frei zugänglich. Sollten Sie es ganz oder in Teilen für eigene Lehrveranstaltungen nutzen, würden wir uns sehr über eine kurze Rückmeldung freuen. Ebenso nehmen wir Hinweise auf Fehler oder inhaltliche Verbesserungsvorschläge jederzeit gerne an.
+
+Neben dem Skript selbst beinhaltet das oben erwähnte Git-Repository eine Sammlung von Übungsblättern für ein vorlesungsbegleitendes zweistündiges Tutorium, einen Einführungsvortrag zur Geschichte der Kryptographie sowie zwei kürzere Foliensätze zu den Themen \emph{AES} und \emph{Verschlüsselungsmodi}. Hinweise zum Übersetzen der \TeX-Quellen finden sich in der beiliegenden \texttt{README}-Datei.
+
+\begin{FlushRight}
+Carolin Torchiani \& Michael Helmling\\
+Koblenz, Oktober 2015
+\end{FlushRight}
+
+
+
+\tableofcontents
+
+\mainmatter
+
+\part{Kryptographie}
+\include{krypto}
+\part{Informations- und Codierungstheorie}
+\include{info}
+\include{coding}
+
+\backmatter
+\printbibliography[heading=bibintoc]
+
+\cleardoublepage
+\renewcommand\indexname{Stichwortverzeichnis}
+\addcontentsline{toc}{chapter}{Stichwortverzeichnis}
+\printindex
+
+\end{document}

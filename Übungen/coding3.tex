@@ -1,0 +1,54 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Informations- und Codierungstheorie,
+  lectureshort = Codierungstheorie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {22.6.2015},
+  lecturer     = Michael Helmling,
+  operator     = Carolin Torchiani,
+  homepage     = {http://userpages.uni-koblenz.de/~helmling/coding},
+  sheetnumber  = 9,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage{cleveref}
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+
+\input{../Skript/definitions.tex}
+\usepackage[math,fonts=false]{mh_basic}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\GF}{\operatorname{GF}}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}
+  Sei $E$ ein Shannon-Code für die Quelle $(A, X)$. Zeigen Sie: wird derselbe Code auf einer anderen Quelle $(A, Y)$ angewendet, so gilt
+  \[ H(Y) + \D(P_Y∥P_X) ≤ \E[l(E(Y))] < H(Y) + \D(P_Y∥P_X) + 1\tp\]
+  Die Aussage des Quellencodierungssatzes verschlechtert sich also gerade um $\D(P_Y∥P_X)$.
+\end{exercise}
+
+\begin{exercise}[title=Abwiege-Problem]
+  Vor Ihnen liegen zwölf optisch ununterscheidbare Kugeln, die bis auf eine alle das gleiche Gewicht haben, sowie eine Waage mit zwei Waagschalen, mit deren Hilfe ermittelt werden kann, ob sich in der linken Schale gleich viel, mehr, oder weniger Masse als in der rechten befindet.
+  
+  Ihre Aufgabe ist es, mit möglichst wenigen Abwiegevorgängen herauszufinden, welches die besondere Kugel ist \emph{und} ob diese schwerer oder leichter als die anderen ist.
+  \begin{itemize}
+    \item Argumentieren Sie, warum mindestens dreimal gewogen werden muss.
+    \item Konstruieren Sie ein Verfahren, um das Problem mit dreimaligem Wiegen garantiert zu lösen. Fassen Sie dazu den Ausgang des Wiegens als \emph{Zufallsvariable} auf (Bemerkung~5.3!), denken Sie an die Interpretation der Entropie als mittlerem Informationszugewinn, und orientieren Sie sich an Lemma~5.23!
+  \end{itemize}
+\end{exercise}
+
+ 
+\end{document}

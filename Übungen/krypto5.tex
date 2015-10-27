@@ -1,0 +1,59 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Kryptographie,
+  lectureshort = Kryptographie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {18.05.2015, 12:00 Uhr},
+  date  = {19.05.2015},
+  lecturer     = Carolin Torchiani,
+  operator     = Michael Helmling,
+  %homepage     = www.google.de,
+  sheetnumber  = 5,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+
+
+
+\usepackage[math,fonts=false]{mh_basic}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\GF}{\operatorname{GF}}
+
+\begin{document}
+\maketitle
+
+ 
+ \begin{exercise}[title = Laufzeiten von Algorithmen]
+  \begin{enumerate}
+  \item Es sei $f: \N \rightarrow \R, \; x \mapsto \sum_{i=0}^n a_ix^i$ eine Polynomfunktion mit Koeffizienten in $\R$, die $a_n> 0$ erfüllt. Zeigen Sie, dass $f = \mathcal O(x^n)$ gilt.
+  \item Seien $n, e \in \N$. Zeigen Sie, dass die Potenz $n^e$ in Polynomialzeit berechnet werden kann. Setzen Sie dabei voraus, dass die Multiplikation zweier ganzer Zahlen in Polynomialzeit möglich ist.
+  \end{enumerate}
+ \end{exercise}
+
+ \begin{exercise}[title = $\varphi$-Funktion]
+ Seien $q_1, q_2 \in \N$ zwei verschiedene Primzahlen. Zeigen Sie $\varphi(q_1q_2) = (q_1-1)(q_2-1)$.
+\end{exercise}
+ 
+ \begin{exercise}[title = RSA-Verfahren]
+  Für das RSA-Kryptosystem wählen wir $k = 4$. 
+  \begin{enumerate}
+   \item Bestimmen Sie Klar- und Chiffretextraum und alle Verschlüsselungsschlüssel $(n, e) \in \mathcal K_E$, die $e \leq 2^k$ erfüllen.
+   \item Verschlüsseln Sie den Klartext $5 \in \mathcal P$ mit dem Schlüssel $(22, 7)$. 
+   \item Entschlüsseln Sie den Chiffretext $E_{(22, 7)}(p) = 15 \in \mathcal C$.
+  \end{enumerate}
+ \end{exercise}
+
+ \begin{exercise}[title = Implementierung RSA-Verfahren]
+  Implementieren Sie Ver- und Entschlüsselung mit dem RSA-Verfahren. Gehen Sie davon aus, dass der genutzte Verschlüsselungsschlüssel $(n, e) \in \mc K_E$ und die Primfaktorzerlegung von $n = q_1 \cdot q_2$ in ein Produkt aus zwei Primzahlen $q_1, q_2 \in \N$ gegeben sind.
+ \end{exercise}
+
+ 
+\end{document}

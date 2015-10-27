@@ -1,0 +1,61 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Informations- und Codierungstheorie,
+  lectureshort = Codierungstheorie, % optional short name for the footer
+  semester     = SS 2015,
+  %deadline     = {},
+  date  = {9.6.2015},
+  lecturer     = Michael Helmling,
+  operator     = Carolin Torchiani,
+  homepage     = {http://userpages.uni-koblenz.de/~helmling/coding},
+  sheetnumber  = 7,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage{cleveref}
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+
+
+\usepackage[math,fonts=false]{mh_basic}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\GF}{\operatorname{GF}}
+
+\begin{document}
+\maketitle
+
+ 
+\begin{exercise}[title=Wiederholungscodes]
+  Verallgemeinern Sie das Verfahren aus dem Einführungsbeispiel auf beliebige Fehlerwahrscheinlichkeit des Kanals $ε<\frac12$ und den $N$-fachen Wiederholungscode $R_N$ für ungerade $N$ (warum nur ungerade?).
+  \begin{enumerate}
+    \item Zeigen Sie mit dem Gesetz der großen Zahlen, dass die Fehlerwahrscheinlichkeit von $R_N$ mit $N→∞$ gegen $0$ geht.
+    \item Stellen Sie eine explizite Formel für die Fehlerwahrscheinlichkeit von $R_N$ auf.\label{ex:rep-2}
+    \item Schätzen Sie die in \cref{ex:rep-2} ermittelte Wahrscheinlichkeit ab, indem Sie nur den dominierenden Term berücksichtigen (um wie viel ist dieser größer als der zweitgrößte?) und die Abschätzungen $⌈N/2⌉≈N/2$ sowie $\binom N{N/2} ≈ 2^N$  nutzen. \label{ex:rep-3}
+    \item Der Lesekopf einer \SI{1}{\tera\byte}-Festplatte lese etwa jedes zehnte Bit verkehrt. Wie viele \SI{1}{\tera\byte}-Festplatten müssten Sie bei Nutzung eines Wiederholungscodes zusammenschalten, um ein Terabyte zu speichern und beim Lesen eine Fehlerrate unter $10^{-15}$ sicherzustellen? Nutzen Sie die in \cref{ex:rep-3} ermittelte Abschätzung.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \begin{enumerate}
+    \item Zeigen Sie: Ist $w = w_1\dotsm w_k ∈ A^*$ und $E$ ein Präfixcode, so kann $E(w) = E(w_1)\dotsm E(w_k)$ eindeutig decodiert werden. Weiterhin kann der Decodierer den Buchstaben $w_i$, $1 ≤ i ≤ k$ sofort rekonstruieren, nachdem $E(w_1)\dotsm E(w_i)$ empfangen wurden (man nennt Präfixcodes deshalb auch \emph{instantan}).
+    \item Zeigen oder widerlegen Sie: jeder Symbolcode, der eindeutig decodiert werden kann, ist ein Präfixcode.
+  \end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[title=Lemma 5.18]
+  Zeigen Sie: Es gilt $\log x ≤ \frac1{\ln 2}(x-1)$ für alle $x > 0$ mit Gleichheit nur für $x=1$.
+\end{exercise}
+ 
+\end{document}

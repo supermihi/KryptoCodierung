@@ -1,0 +1,100 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Kryptographie,
+  lectureshort = Kryptographie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {04.05.2015, 12:00 Uhr},
+  date  = {05.05.2015},
+  lecturer     = Carolin Torchiani,
+  operator     = Michael Helmling,
+  %homepage     = www.google.de,
+  sheetnumber  = 3,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+
+
+
+\usepackage[math,fonts=false]{mh_basic}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+
+\newcommand{\mc}{\mathcal}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}[title=Vernam-One-Time-Pad]
+ Implementieren Sie das Vernam-One-Time-Pad. Finden Sie auch einen Algorithmus, mit dem das One-Time-Pad geknackt werden kann?
+\end{exercise}
+
+
+\begin{exercise}
+ Die Klartextraum sei $\mc P = \{a, b\}$ mit $P_{X_{\mc P}}(a) = \frac 1 4$ und $P_{X_{\mc P}}(b) = \frac 3 4$ als Wahrscheinlichkeiten für die Klartexte, der Schlüsselraum sei $\mc K = \{*, \circ, +\}$ mit $P_{X_{\mc K}}(*) = \frac 1 2$, $P_{X_{\mc K}}(\circ) = P_{X_{\mc K}}(+) = \frac 1 4$ als Wahrscheinlichkeiten für die Schlüssel und der Chiffretextraum sei $\mc C = \{1, 2, 3, 4\}$. Die Verschlüsselungsfunktionen seien durch die folgende Verschlüsselungsmatrix gegeben:
+ \begin{center}
+ \begin{tabular}{c|cc}
+   & a & b \\
+   \hline
+   *& 1 & 2 \\
+   \circ & 2 & 3 \\
+   +& 3 & 4
+ \end{tabular}
+ \end{center}
+Geben Sie für alle $c \in \mc C$ und $p \in \mc P$ die Wahrscheinlichkeiten der Chiffretexte $P_{X_{\mc C}}(c)$ und die bedingten Wahrscheinlichkeiten $P_{X_{\mc P}|X_{\mc C} = c}(p)$ an. Ist das Kryptosystem perfekt? 
+\end{exercise}
+
+\begin{exercise}
+Beweisen Sie:
+ \begin{enumerate}
+  \item Die beiden Bedingungen in der Definition der perfekten Sicherheit 1.30 sind äquivalent.
+  \item In jedem Kryptosystem mit nicht-leerer Schlüsselmenge ist die Anzahl der Chiffretexte mindestens so groß wie die Anzahl der Klartexte. Ist das Kryptosystem perfekt, so ist auch die Anzahl der Schlüssel mindestens so groß wie die Anzahl der Klartexte.
+  \item Sei $|\mc P| = |\mc K| = |\mc C| < \infty$ und sei $c \in C$ ein Chiffretext. Zeigen Sie, dass für jeden Schlüssel $e \in \mc K$ ein Klartext $p \in \mc P$ existiert, der mit dem Schlüssel $e$ zum Chiffretext $c$ verschlüsselt wird, d.\,h. der $E_e(p) = c$ erfüllt.
+ \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}
+ \item Gegeben seien Matrizen über $\Z_5$: 
+ \[A = \begin{pmatrix}
+        [2] & [3] & [0] \\
+        [1] & [4] & [3]
+       \end{pmatrix}, \;\; B = 
+       \begin{pmatrix}
+       [1] & [3] \\
+       [3] & [4] \\
+       [1] & [0] 
+       \end{pmatrix}, \;\; C =
+       \begin{pmatrix}
+        [1] & [1] & [3] \\
+        [0] & [4] & [2]
+       \end{pmatrix}
+.\]
+ Berechnen Sie (falls möglich) $A + B$, $A + C$, $A \cdot B$, $A \cdot C$. Welche der Matrizen sind invertierbar? Berechnen Sie das Produkt von $A$ mit den Einheitsvektoren 
+ \[([1], [0], [0])^{\top}, ([0], [1], [0])^{\top}, ([0], [0], [1])^{\top} \in \Z_5^{3 \times 1}.\]
+ Was fällt auf?
+
+\item  Seien $n, N \in \N$. Betrachten Sie das Kryptosystem, dessen Klartext-, Chiffretext- und Schlüsselraum durch 
+ \[\mc P = \mc C = \mc K = \left\{\begin{pmatrix} 1 & * & * & \dotsc & * \\
+                                   0 & 1 & * & \dotsc & * \\
+                                   \vdots & \ddots & \ddots & \ddots & \vdots \\
+                                   0 & 0 & 0 & 1&  * \\
+                                   0 & 0 & 0 & 0 & 1 
+                                  \end{pmatrix} \in (\Z_N)^{n \times n}\right\},\]
+die Menge aller oberen Dreiecksmatrizen über $\Z_N$ vom Format $n \times n$ mit Einsen auf der Diagonalen gegeben sind. Die zu einem Schlüssel $e \in \mc K$ gehörige Verschlüsselungsfunktion sei
+\[E_{e}: \mc P \rightarrow \mc C, p \mapsto p \cdot e,\]
+wobei $\cdot$ für das gewöhnliche Matrixprodukt steht. Die Schlüssel werden gleichverteilt gewählt.
+\begin{enumerate}
+ \item Wie groß ist der Schlüsselraum?
+ \item Ist das Kryptosystem perfekt?
+ \end{enumerate}
+ \end{enumerate}
+\end{exercise}
+
+
+
+\end{document}

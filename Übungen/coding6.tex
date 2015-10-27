@@ -1,0 +1,58 @@
+% load document class mhexsheet & select language as option (german or english)
+\documentclass[german]{mhexsheet}
+
+% set the parameters for the current exercise sheet with \exerciseSetup (key-value interface)
+\exerciseSetup{
+  lecture      = Einführung in die Informations- und Codierungstheorie,
+  lectureshort = Codierungstheorie, % optional short name for the footer
+  semester     = SS 2015,
+  deadline     = {13.7.2015},
+  lecturer     = Michael Helmling,
+  operator     = Carolin Torchiani,
+  homepage     = {http://userpages.uni-koblenz.de/~helmling/coding},
+  sheetnumber  = 12,
+  %solution, % solution (or solution=true) enables output of solution environments. solution=false (default) disables it,
+  % logo = \includegraphics[width=5cm]{image.png}, % can override the standard logo
+  % logowidth = 7cm % ... and also its width
+}
+\usepackage{cleveref}
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=⋅,
+  locale=DE]{siunitx}
+\usepackage{amssymb}
+\usepackage[math,fonts=false]{mh_basic}
+\input{../Skript/definitions.tex}
+\setmathfont{texgyretermes-math.otf}
+\setmathfont[range={"29F5}]{XITS Math}
+\setmathfont[range={}]{texgyretermes-math.otf}
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+\begin{exercise}
+  Sei $\C$ ein $(N,K)$-Blockcode, $X$ eine Zufallsvariable mit Alphabet $\C$ (also ein zufälliges Codewort), $\K=(B, P_{\K,0}, P_{\K,1})$ ein Kanal und $(X,Y)$ das entsprechende Paar aus Kanalein- und Ausgabe. Ein \emph{Maximum A-Posteriori-(MAP-)Decodierer} $D_\mathrm{MAP}$ entscheidet sich für ein unter Berücksichtigung der empfangenen Kanalausgabe $\{Y=y\}$ mit $y∈B^N$ am wahrscheinlichsten gesendetes Codewort:
+  \[ D_\mathrm{MAP}(y) = \argmax_{x∈\C} P(X=x∣Y=y) \]
+  Zeigen Sie: Bei gleichverteiltem $X$ ist jeder ML-Decodierer auch ein MAP-Decodierer.
+\end{exercise}
+
+\begin{exercise}
+  Zeigen Sie: Der Hamming-Abstand $\d(x,y) \coloneqq \abs{\{i\colon x_i ≠ y_i\}}$ ist eine translationsinvariante Metrik auf $\GF(2)^N$.
+\end{exercise}
+
+\begin{exercise}
+  Die \emph{Global Trade Item Number (GTIN)}, auch \emph{European Article Number (EAN)} ist eine 13-stellige Zahl zur international eindeutigen Kennzeichnung von Handelsprodukten, die in der Regel in Form eines Strichcodes auf Produkte gedruckt wird. Die GTIN enthält einen Code zur Fehlererkennung:  nur die ersten 12 Ziffern enthalten Informationen zu Land, Unternehmen und Artikelnummer, während an 13.\ Stelle eine \emph{Prüfziffer} steht, die so gewählt wird, dass
+  \[ x_1 + 3 x_2 + x_3 + 3 x_4 + \dotsm + 3 x_{12} + x_{13} ≡ 0 \pmod{10}\]
+  gilt, wenn $x_1\dotsm x_{13}$ die 13 Stellen der GTIN sind.
+  \begin{itemize}
+    \item Wie viele Fehler (falsch gelesene Ziffern) kann dieser Code \emph{korrigieren}?
+    \item Wie viele Fehler kann er \emph{erkennen}?
+    \item Wann kann eine \emph{Vertauschung} von zwei benachbarten Ziffern erkannt werden?
+  \end{itemize}  
+  Der GTIN-Code ist mit dem ISBN13-Code für Bücher identisch, der die alte 10-Stellige ISBN-Nummer abgelöst hat. Diese besaß ebenfalls eine Prüfziffer $x_{10} ∈ \{0,1,\dotsc,9,X\}$ (wobei $X$ für 10 steht), die nach der Bedingung
+  \[ 10 x_1 + 9 x_2 + \dotsm + 2 x_9 + x_{10} \equiv 0 \pmod{11} \]
+  gebildet wird. Zeigen Sie, dass ISBN10 \emph{jede} Vertauschung von zwei Ziffern erkennt!
+\end{exercise}
+ 
+\end{document}
