@@ -14,5 +14,7 @@
 *.bcf
 *.synctex.gz
 *.run.xml
+*.fdb_latexmk
+*.fls
 Skript/main.pdf
 Übungen/*.pdf
