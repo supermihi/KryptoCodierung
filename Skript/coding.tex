@@ -195,14 +195,14 @@ Durch die disjunkten $t$-Kugeln wissen wir, das bei ML-Decodierung im Fall von h
 
 \begin{definition}\label{def:perfect}
   Ein Code $\C$ mit Minimaldistanz $d≥1$ und $t=⌊(d-1)/2⌋$ heißt \emphex[Code!perfekter]{perfekt}, wenn 
-  \[ \GF(2)^N = ⋃_{x∈\C} \B_t(x) \]
+  \[ \GF{(2)}^N = ⋃_{x∈\C} \B_t(x) \]
   gilt, die (disjunkte) Vereinigung aller $t$-Kugeln um die Codewörter also den ganzen Raum ausfüllt.
 \end{definition}
 Wir haben oben gezeigt dass die $t$-Kugeln um die Codewörter disjunkt sind, also überlappungsfrei im Raum $\GF(2)^N$ liegen. Da dort aber nur endlich viel Platz ist, können die Kugeln nicht beliebig groß werden, und es kann nicht beliebig viele geben. Die folgende Ungleichung präzisiert diesen Zusammenhang.
 
 \begin{theorem}[Kugelpackungsschranke]\label{lem:spherePacking}
   Sei $\C$ ein $(N,K)$-Blockcode, $d=\d(\C)≥1$ und $t=⌊(d-1)/2⌋$. Dann gilt die \emphex{Kugelpackungsschranke} (auch \emphex{Hamming-Schranke} genannt)
-  \[ 2^K \sum_{i=0}^t \binom Ni ≤ 2^N\tk\]
+  \[ 2^K \sum_{i=0}^t \binom Ni ≤ 2^N\tk \]
   die genau dann mit Gleichheit erfüllt ist, wenn $\C$ perfekt ist.
 \end{theorem}
 \begin{proof}
@@ -279,7 +279,7 @@ Obwohl wir mit linearen Blockcodes nur noch eine kleine Teilmenge \emph{aller} m
     \[ \C = \{ w^T G\colon w ∈ \GF(2)^K \}\tp\]
   Damit können wir $G$ zum Codieren benutzen: die Abbildung
   \begin{align*}
-    E_\C\colon &\GF(2)^K → \GF(2)^N\\
+    E_{\C}\colon &\GF(2)^K → \GF(2)^N\\
                &w → wG
   \end{align*}
   ist nach Voraussetzung (Zeilen von $G$ sind Basis, also linear unabhängig) injektiv und ihr Bild ist gerade der Unterraum $\C⊆\GF(2)^N$. Ein linearer $(N,K)$-Blockcode ist also durch die Angabe einer binären $K×N$-Matrix eindeutig bestimmt und kann mit $K⋅N$\,Bits abgespeichert werden. Im Vergleich zu den $2^K⋅N$\, Bits für allgemeine Codes (vgl.\ \cpageref{chap:cod}) ist dies eine drastische Reduktion; ein linearer $(1024,512)$-Code bräuchte so ungefähr \SI{512}{\kibi\byte}.
@@ -410,11 +410,11 @@ Für $n∈ℕ$ sei $\GF(2^n)$ der endliche Körper mit $2^n$ Elementen (siehe \c
   \[\d(x,y) = \abs{\{i∈\{1,\dotsc, N\}\colon x_i ≠ y_i\}}\]
   nur dass jetzt $x_i,y_i∈\GF(2^n)$ sind. Genauso direkt verallgemeinern sich $\d(\C)$, $\w(\C)$ etc.
 \end{enumerate}
-Ist $\C$ ein linearer $(N,K)$-Blockcode über $\GF(2^n)$, erhalten wir einen (nicht notwendigerweise linearen) binären $(n⋅N, n⋅K)$-Blockcode $\tilde\C$, indem wir mit \cref{not:fieldVectorspace} jedes Element von $\GF(2^n)$ als $n$-Vektor über $\GF(2)$, also $n$ Bits, darstellen und diese aneinanderhängen. Wir können also auch mit nicht-binären Codes ohne große Umstände die Daten einer binären Quelle codieren und über einen binären Kanal verschicken.
+Ist $\C$ ein linearer $(N,K)$-Blockcode über $\GF(2^n)$, erhalten wir einen (nicht notwendigerweise linearen) binären $(n⋅N, n⋅K)$-Blockcode $\tilde{\C}$, indem wir mit \cref{not:fieldVectorspace} jedes Element von $\GF(2^n)$ als $n$-Vektor über $\GF(2)$, also $n$ Bits, darstellen und diese aneinanderhängen. Wir können also auch mit nicht-binären Codes ohne große Umstände die Daten einer binären Quelle codieren und über einen binären Kanal verschicken.
 
 Ist zum Beispiel $\C$ ein linearer $(3,2)$-Code über $\GF(2^4)$ und $x = (α_1,α_2,α_3)∈\C$, wobei  $α_i∈\GF(2^4)$ die Vektor-Darstellungen
 \[ α_1 = (1, 1, 0, 1), α_2 = (0,0,1,0), α_3 = (0,1,1,0)\]
-haben, so ist das entsprechende Codewort $\tilde x$ des entsprechenden $(4⋅3,4⋅2)$-Codes $\tilde\C$ über $\GF(2)$ gegeben durch $\tilde x = 110100100110$.
+haben, so ist das entsprechende Codewort $\tilde x$ des entsprechenden $(4⋅3,4⋅2)$-Codes $\tilde{\C}$ über $\GF(2)$ gegeben durch $\tilde x = 110100100110$.
 
 Warum tun wir uns den Umweg über $\GF(2^n)$ dann überhaupt an? Der Grund ist, dass man im nicht-binären Fall leichter \enquote{gute} Codes mit starken Eigenschaften (\zB hohe Minimaldistanz) findet – beispielsweise die gleich definierten Reed-Solomon-Codes.
 \end{remark}
@@ -472,14 +472,14 @@ Wir benötigen noch ein Resultat aus der Algebra, das wir ohne Beweis zitieren:
   nennen wir den \emphex{Reed-Solomon-Code} RS($n,N,K$). Die Elemente von $\C$ entstehen also dadurch, dass wir irgendein Polynom $f∈\GF(2^n)[t]_{K-1}$ an den $N$ Stellen $1,α,\dotsc,α^{N-1}$ auswerten und die Ergebnisse zu einem $N$-Wort über $\GF(2^n)$ aneinanderhängen.
 \end{definition}
 \begin{remark}\label{rem:rsCoding}
-  Aus der Definition von RS($n,N,K$) erhalten wir unmittelbar eine Codierungsfunktion $E_\C\colon \GF(2^n)^K → \GF(2^n)^N$: jedes $w = (w_1,\dotsc, w_K) ∈ \GF(2^n)^K$, können wir eindeutig mit einem Polynom $w(t) \coloneqq \sum_{i=0}^{K-1} w_{i+1} t^i ∈ \GF(2^n)[t]_{K-1}$ identifizieren (die $K$ Einträge von $w$ sind also die Koeffizienten des Polynoms) und dann $E_\C(w) = \(w(1),w(α),\dotsc,w\(α^{N-1}\)\)$ setzen.
+  Aus der Definition von RS($n,N,K$) erhalten wir unmittelbar eine Codierungsfunktion $E_{\C}\colon \GF(2^n)^K → \GF(2^n)^N$: jedes $w = (w_1,\dotsc, w_K) ∈ \GF(2^n)^K$, können wir eindeutig mit einem Polynom $w(t) \coloneqq \sum_{i=0}^{K-1} w_{i+1} t^i ∈ \GF(2^n)[t]_{K-1}$ identifizieren (die $K$ Einträge von $w$ sind also die Koeffizienten des Polynoms) und dann $E_{\C}(w) = \(w(1),w(α),\dotsc,w\(α^{N-1}\)\)$ setzen.
 \end{remark}
 \begin{example}
   Sei $n=2$, $N=3$ und $K=2$. Dann ist $\GF(2^n)[t]_{K-1} = \GF(2^2)[t]_1$ die Menge aller Polynome vom Grad höchstens $1$:
   \[\GF(2^2)[t]_1  = \left\{ a_1 t + a_0\colon a_1, a_0 ∈ \GF(2^2) \right\}\tp\]
   Sei \zB $w=((1,0), (1,1)) = (α,α^2) ∈\GF(2^2)^K$. Dann ist $w(t) = α  + α^2⋅t ∈ \GF(2^2)[t]_1$ das entsprechende Polynom, und
   \begin{align*}
-    E_\C(w) &= \( w(1), w(α), w(α^2) \) \\
+    E_{\C}(w) &= \( w(1), w(α), w(α^2) \) \\
             &= \( α + α^2⋅1, α+α^2⋅α, α + α^2⋅α^2 \)\\
             &= \( (1,0) + (1,1), (1,0) + (0,1), (1,0) + (1,0) \) \\
             &= \( (0, 1), (1,1), (0,0) \) = x∈ \GF(2^2)^N
@@ -618,12 +618,12 @@ Um einen RS-Code über $\GF(2^8)$ zu verwenden, wird die im letzten Abschnitt er
 \begin{theorem}\label{thm:rsCoding2}
   Sei $1≤K≤N≤2^n$, $α$ ein Erzeuger von $\GF(2^n)$ und $g(t) \coloneqq \prod_{i=0}^{N-K}(t-α^i)$. Für $w=(w_1,\dotsc, w_K) ∈\GF(2^n)^K$ sei wie in \cref{rem:rsCoding} $w(t) = \sum_{i=0}^{K-1} w_{i+1} t^i$ und $r^w(t)$ der Rest bei Polynomdivision von $t^{N-K}⋅w(t)$ durch $g(t)$, also $t^{N-K}⋅w(t) = g(t)⋅q(t) + r^w(t)$ für ein Polynom $q(t)$ und $\deg(r^w(t)) < \deg(g(t)) = N-K$. Dann ist
   \begin{align*}
-    E_\C\colon \GF(2^n)^K &→ \GF(2^n)^N \\
+    E_{\C}\colon \GF(2^n)^K &→ \GF(2^n)^N \\
                         w &↦ \(w_1, \dotsc, w_k, r^w_1,\dotsc, r^w_{N-K}\)
   \end{align*}
   eine Codierungsfunktion für RS($n,N,K$).
 \end{theorem}
-Im Gegensatz zu \cref{rem:rsCoding} müssen wir also nur \emph{eine} Polynomdivision ausführen und dann die Koeffizienten des Restpolynoms an die Eingabe $w$ anhängen, um das Wort $w$ mit einem Reed-Solomon-Code zu codieren. Eine Codierungsfunktion $E_\C$ der Form $E_\C(w) = (w, f(w))$, bei der jedes Codewort in den ersten $K$ Komponenten gerade der Eingabe entspricht, nennt man \emphex{systematisch}.
+Im Gegensatz zu \cref{rem:rsCoding} müssen wir also nur \emph{eine} Polynomdivision ausführen und dann die Koeffizienten des Restpolynoms an die Eingabe $w$ anhängen, um das Wort $w$ mit einem Reed-Solomon-Code zu codieren. Eine Codierungsfunktion $E_{\C}$ der Form $E_{\C}(w) = (w, f(w))$, bei der jedes Codewort in den ersten $K$ Komponenten gerade der Eingabe entspricht, nennt man \emphex{systematisch}.
 
 Die 108 Byte $b = b_1\dotsm b_{108}$ aus dem vorigen Abschnitt werden jetzt in vier Gruppen $\tilde b_1, \dotsc, \tilde b_4$ zu je 27 Byte zusammengefasst ($27⋅4=108$). Nach \cref{not:fieldVectorspace} fassen wir jedes $\tilde b_i$ als Element von $\GF(2^8)^{27}$ auf, das nach der Methode aus \cref{thm:rsCoding2} mit dem RS($8, 43, 27$)-Code zu einem Codewort $c_i = (\tilde b^i, \tilde r^i) ∈ \GF(2^n)^43$ mit $\tilde r^i ∈ \GF(2^n)^{16}$ codiert wird. Nach \cref{lem:rs} hat dieser Code die Minimaldistanz $43-27+1 = 17$ und kann so auf dem BSC bis zu $(d-1)/2 = 8$ Fehler oder $8/43 ≈ \SI{18.6}{\percent}$ korrigieren. Die vier Codewörter $c^1,\dotsc,c^4$ können damit insgesamt bis zu \num{32} Fehler korrigieren – aber nur, wenn sich diese \enquote{gleichmäßig} verteilen, so dass in jedem Codewort genau $8$ Fehler passieren. Landen hingegen alle Fehler im selben Codewort, reichen schon $9$ Fehler (und damit $9/143≈\SI{6.3}{\percent}$) für einen Decodierfehler. 
 
@@ -703,7 +703,7 @@ Nun ist jedes $x_i$, $1≤i≤172$, ein Element von $\GF(2^8)$, das wir wieder n
     }
     \draw[->,thick] (-.5, 0) -- node[above,sloped] {bei Abwärtsbewegung} (-.5, 4);
   \end{tikzpicture}
-  \caption{Verteilung der finalen Datensequenz $x∈\GF(2^8)^{172}$ in $Q$. Links: $x_1, x_2,\dotsc$ werden schlangenförmig von unten beginnend in den noch nicht durch Positionsmuster o.\,ä.\ belegten Platz verteilt, wobei jeweils zwei Spalten gemeinsam verwendet werden. Mitte und rechts: Verteilung der $8$ Bits des $i$-ten Bytes $x_i$ bei Auf- und Abwärtsbewegung der eben beschriebenen Schlangenlinien.}
+  \caption{Verteilung der finalen Datensequenz $x∈\GF(2^8)^{172}$ in $Q$. Links: $x_1, x_2,\dotsc$ werden schlangenförmig von unten beginnend in den noch nicht durch Positionsmuster o.\,ä.\ belegten Platz verteilt, wobei jeweils zwei Spalten gemeinsam verwendet werden. Mitte und rechts: Verteilung der $8$ Bits des $i$-ten Bytes $x_i$ bei Auf- und Abwärtsbewegung der eben beschriebenen Schlangenlinien.}%
   \label{fig:bitPlacement}
 \end{figure}
 Bei $172$ Bytes werden so insgesamt $172⋅8=1376$ Einträge von $Q$ belegt, so dass von den $1383$ Pixeln im Datenbereich am Ende $7$ unbelegt (weiß) bleiben.
@@ -712,7 +712,7 @@ Bei $172$ Bytes werden so insgesamt $172⋅8=1376$ Einträge von $Q$ belegt, so 
 Nach Platzierung von $x$ in der Matrix $Q$ können durch Zufall Muster auftreten, die den Positions-Mustern ähneln und so die Bilderkennung erschweren. Um dies zu verhindern, wird eine von acht \emph{Muster-Matrizen} $M^0,\dotsc, M^7 ∈ \GF(2)^{41×41}$ ausgewählt und auf $Q$ addiert. Dabei wird nur der Datenbereich von $Q$ verändert: $M^k_{i,j}=1$ kann nur gelten, vonn $Q_{i,j}$ nicht zu einem Auffindungs-Muster oder der Format-Information gehört. Beim Lesen des QR-Codes wird dieser Schritt wieder rückgängig gemacht, indem das entsprechende $M^k$ nochmal auf die Summe $Q+M^k$ addiert wird, denn $Q+M^k+M^k = Q$.
 
 Am Ende wird das verwendete Fehlerlevel (bei uns: M) und die Nummer der verwendeten Maske $k∈\{0,\dotsc,7\}$ zu einem binären 5-Tupel 
-$f$ zusammengefasst, \zB $f = \underbrace{00}_{\text{M}} \underbrace{101}_{\op{bin}_3{k}}$ und mit einem $(15,5)$-Code $\hat\C$ mit Minimaldistanz $\d(\hat\C)=7$ zu einer 15-Bit-Nachricht $φ = E_{\hat\C}(f)$ codiert. Darauf wird schließlich noch die Folge $γ=101010000010010$ addiert; dadurch erreicht man, dass die finale Format-Information $ϑ=φ+γ$ nie der Nullvektor ist (in diesem Fall wäre er schwer vom Trenner um die Positionsmuster zu unterscheiden). Schließlich wird $ϑ$ \emph{zweimal} in die Bereiche um die Positionsmuster geschrieben. Diese Information, ohne die keine Decodierung des QR-Codes möglich ist, ist also besonders gut gesichert.
+$f$ zusammengefasst, \zB $f = \underbrace{00}_{\text{M}} \underbrace{101}_{\op{bin}_3{k}}$ und mit einem $(15,5)$-Code $\hat{\C}$ mit Minimaldistanz $\d(\hat{\C})=7$ zu einer 15-Bit-Nachricht $φ = E_{\hat{\C}}(f)$ codiert. Darauf wird schließlich noch die Folge $γ=101010000010010$ addiert; dadurch erreicht man, dass die finale Format-Information $ϑ=φ+γ$ nie der Nullvektor ist (in diesem Fall wäre er schwer vom Trenner um die Positionsmuster zu unterscheiden). Schließlich wird $ϑ$ \emph{zweimal} in die Bereiche um die Positionsmuster geschrieben. Diese Information, ohne die keine Decodierung des QR-Codes möglich ist, ist also besonders gut gesichert.
 
 \subsection{Decodierung}
 Zur Decodierung werden alle genannten Schritte in umgekehrter Reihenfolge durchgeführt: Nachdem ein Bilderkennungs-Algorithmus den QR-Code aufgefunden und gedreht bzw.\ entzerrt hat, wird zunächst die Format- und Maskeninformation ausgelesen, die Maske rückgängig gemacht, die vier Codewörter extrahiert, jedes davon mit einem Reed-Solomon-Decodieralgorithmus (den wir hier nicht behandelt haben) decodiert, woraus sich die Nachricht $m(w)$ ergibt. Anhand von Modus-Indikator $0010$ und Zeichenzähler kann schließlich die Originalnachricht rekonstruiert werden, solange in jedem der vier Codewörter höchstens $8$ Lesefehler vorliegen.

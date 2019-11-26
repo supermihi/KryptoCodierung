@@ -818,19 +818,19 @@ Unsere binäre Quelle (vgl. \pageref{sec:noisy}) erzeuge $R≤1$ Bits pro Sekund
 Da unser Kanal nach Annahme \SI{1}{\bit\per\second} überträgt, kann ein codiertes $N$-Wort innerhalb von $N$ Sekunden verschickt werden. Innerhalb dieser $N$ Sekunden hat die Quelle ein neues $K$-Wort erzeugt, welches dann sofort codiert und in den nächsten $N$ Sekunden übertragen wird. Der Codierer muss also $K$ Bits zwischenspeichern können; darüber hinaus gibt es aber keinen \enquote{Rückstau}. Abgesehen von der codierungs-basierten Verzögerung von $N$ Sekunden können alle Daten übertragen werden. Dem Verhältnis $K/N$ kommt dabei die Rolle der schon in \cref{ex:codingIntro} eingeführten \emph{Codierungsrate} zu, die wir ab jetzt nur noch \emph{Rate} nennen werden.
 
 \begin{definition}[Blockcode]\label{def:blockcode}
-  Seien $N, K∈ℕ$. Ein \emphex[Blockcode]{$(N, K)$-Blockcode} ist ein Tupel $(E_\C, \C)$, bestehend aus einer Abbildung
-  \[ E_\C\colon \GF(2)^K → \GF(2)^N \tk\]
-  also einer Vorschrift die jedem binären $K$-Wort ein binäres $N$-Wort zuweist, sowie der als Bild von $E_\C$ definierten Familie von $2^K$ Codewörtern
-    \[ \C = \{E_\C(w)\}_{w ∈ \GF(2)^K}\tp\]
+  Seien $N, K∈ℕ$. Ein \emphex[Blockcode]{$(N, K)$-Blockcode} ist ein Tupel $(E_{\C}, \C)$, bestehend aus einer Abbildung
+  \[ E_{\C}\colon \GF(2)^K → \GF(2)^N \tk\]
+  also einer Vorschrift die jedem binären $K$-Wort ein binäres $N$-Wort zuweist, sowie der als Bild von $E_{\C}$ definierten Familie von $2^K$ Codewörtern
+    \[ \C = \{E_{\C}(w)\}_{w ∈ \GF(2)^K}\tp\]
  $N$ wird \emphex{Blocklänge} von $\C$ genannt; die \emphex{Rate} des Codes ist definiert als $R = K/N = \frac{\log\abs \C}N$.
 \end{definition}
 
 \begin{remark}
-  Die durch $E_\C$ gegebene Zuordnung der von der Quelle erzeugten $K$-Wörter zu Codewörtern ist für die fehlerkorrigierenden Eigenschaften eines Codes nicht relevant; es kommt nur auf die Struktur der Codewörter $\C$ an. Wir werden deshalb in Zukunft das $E_\C$ gar nicht mehr erwähnen und einfach von $\C$ als \enquote{dem Code} reden. Dass wir diesen als \emph{Familie} und nicht als Menge definieren, liegt daran, dass wir (aus technischen Gründen, die später im Beweis klar werden) keine Injektivität von $E_\C$ fordern, weshalb $\C$ auch mehrfache Einträge enthalten kann.
+  Die durch $E_{\C}$ gegebene Zuordnung der von der Quelle erzeugten $K$-Wörter zu Codewörtern ist für die fehlerkorrigierenden Eigenschaften eines Codes nicht relevant; es kommt nur auf die Struktur der Codewörter $\C$ an. Wir werden deshalb in Zukunft das $E_{\C}$ gar nicht mehr erwähnen und einfach von $\C$ als \enquote{dem Code} reden. Dass wir diesen als \emph{Familie} und nicht als Menge definieren, liegt daran, dass wir (aus technischen Gründen, die später im Beweis klar werden) keine Injektivität von $E_{\C}$ fordern, weshalb $\C$ auch mehrfache Einträge enthalten kann.
 \end{remark}
 
 \begin{example}
-  In \cref{ex:codingIntro} haben wir den $3$-Wiederholungscode $E\colon \GF(2) → \GF(2)^3$ definiert und damit ohne es zu wissen bereits einen Blockcode genutzt: dabei war $E_\C = E$ gegeben durch $E_\C(a) = aaa$ für $a∈\GF(2)$. Damit ergibt sich $K=1$ und die Blocklänge $N=3$. Die Rate des Codes ist $K/N=1/3$, und $\C = \{ E(0), E(1)\} = \{000, 111\}$.
+  In \cref{ex:codingIntro} haben wir den $3$-Wiederholungscode $E\colon \GF(2) → \GF(2)^3$ definiert und damit ohne es zu wissen bereits einen Blockcode genutzt: dabei war $E_{\C} = E$ gegeben durch $E_{\C}(a) = aaa$ für $a∈\GF(2)$. Damit ergibt sich $K=1$ und die Blocklänge $N=3$. Die Rate des Codes ist $K/N=1/3$, und $\C = \{ E(0), E(1)\} = \{000, 111\}$.
 \end{example}
 
 \begin{remark}\label{rem:channelRV-N}
@@ -842,15 +842,15 @@ Da unser Kanal nach Annahme \SI{1}{\bit\per\second} überträgt, kann ein codier
 Erhält der Empfänger ein $N$-Wort $y∈B^N$, muss er sich für ein Codewort $x∈\C$ entscheiden, von dem er \enquote{glaubt}, dass es gesendet wurde. Dieser Entscheider wird \emph{Decodierer} genannt.
 \begin{definition}
   Ein \emph{Decodierer} für einen $(N, K)$-Blockcode $\mathcal C$ und einen Kanal $\K$ mit Ausgabealphabet $B$ ist eine Abbildung
-  \[D_\C\coloneqq B^N → \C ∪\{\t e\}\tp\]
+  \[D_{\C}\coloneqq B^N → \C ∪\{\t e\}\tp\]
   Der Decodierer entscheidet sich also bei gegebenem Kanaloutput $y∈B^N$ entweder für ein Codewort aus $\mathcal C$ oder nutzt das spezielle Symbol $\t e$ um einen Fehlschlag anzuzeigen.
   
-  Wird $x∈\C$ gesendet, $y∈B^N$ empfangen und ist $D_\C(y) ≠ x$, spricht man von einem \emph{Decodierfehler}. Bei $D_\C(y)=\t e$ tritt auf jeden Fall ein Decodierfehler auf. Aber auch bei $D_\C(y)∈\C$ kann ein Decodierfehler vorliegen, nämlich dann wenn $D_\C$ ein \emph{anderes} als das gesendete Codewort ausgibt.
+  Wird $x∈\C$ gesendet, $y∈B^N$ empfangen und ist $D_{\C}(y) ≠ x$, spricht man von einem \emph{Decodierfehler}. Bei $D_{\C}(y)=\t e$ tritt auf jeden Fall ein Decodierfehler auf. Aber auch bei $D_{\C}(y)∈\C$ kann ein Decodierfehler vorliegen, nämlich dann wenn $D_{\C}$ ein \emph{anderes} als das gesendete Codewort ausgibt.
 \end{definition}
 
 \begin{example}
   Der auf Mehrheitsentscheidung basierende Decodierer im Eingangsbeispiel (\cref{ex:codingIntro}) für den $3$-Wiederholungscode ist durch
-  \[ D_\C(y_1y_2y_3) = \begin{cases}
+  \[ D_{\C}(y_1y_2y_3) = \begin{cases}
     000&\text{falls }\abs{\{i∈\{1,2,3\}\colon y_i=0\}} ≥ 2\\
     111&\text{sonst}
   \end{cases}
@@ -863,19 +863,19 @@ Erhält der Empfänger ein $N$-Wort $y∈B^N$, muss er sich für ein Codewort $x
 Mit Blockcode, Kanal und Decodierer erhalten wir nun folgendes Nachrichtenübertragungssystem:
 \begin{Center}
   \begin{tikzpicture}[node distance=1cm and 2cm]
-    \node[box=encoder] (encoder2) {$E_\C$} edge[<-,"$\GF(2)^K$" above] ++(-1.5, 0);
+    \node[box=encoder] (encoder2) {$E_{\C}$} edge[<-,"$\GF(2)^K$" above] ++(-1.5, 0);
     \node[box=channel] (channel) [right=of encoder2] {$\K$} edge[<-,"$x∈\C$" above] (encoder2);
-    \node[box=encoder] (decoder) [right=of channel] {$D_\C$} edge[<-,"$y∈B^N$" above] (channel);
+    \node[box=encoder] (decoder) [right=of channel] {$D_{\C}$} edge[<-,"$y∈B^N$" above] (channel);
     \draw[->] (decoder) --node[above] {$\hat x ∈ \GF(2)^N ∪ \{\t e\}$} ++(3,0);
     \node[box=channel] (noise) [above=of channel] {Rauschen} edge[->] (channel);
    \end{tikzpicture}
 \end{Center}
-Dabei fehlt eigentlich rechts noch eine Komponente, die das von $D_\C$ ausgegebene Codewort $\hat x ∈\C$ wieder in das ursprüngliche Wort aus $\GF(2)^K$ (also die Eingabe von $E_\C$) übersetzt, die wir aber weglassen, da uns wie gesagt die genaue Form von $E_\C$ nicht interessiert.
+Dabei fehlt eigentlich rechts noch eine Komponente, die das von $D_{\C}$ ausgegebene Codewort $\hat x ∈\C$ wieder in das ursprüngliche Wort aus $\GF(2)^K$ (also die Eingabe von $E_{\C}$) übersetzt, die wir aber weglassen, da uns wie gesagt die genaue Form von $E_{\C}$ nicht interessiert.
 
 Für ein solches System können wir nun die Wahrscheinlichkeit eines Decodierfehlers bestimmen:
 \begin{definition}\label{def:errorRate}
-  Seien ein $(N, K)$-Blockcode $\C$, ein Kanal $\K$ und ein passender Decodierer $D_\C$ gegeben. Für gegebenes $x∈\C$ ist
-  \[ \pErr(x) \coloneqq \sum_{\substack{y∈B^N\colon\\ D_\C(y) ≠ x}} \prod_{i=1}^N P_{\K, x_i}(y_i)\]
+  Seien ein $(N, K)$-Blockcode $\C$, ein Kanal $\K$ und ein passender Decodierer $D_{\C}$ gegeben. Für gegebenes $x∈\C$ ist
+  \[ \pErr(x) \coloneqq \sum_{\substack{y∈B^N\colon\\ D_{\C}(y) ≠ x}} \prod_{i=1}^N P_{\K, x_i}(y_i)\]
   die Wahrscheinlichkeit eines Decodierfehlers, wenn $x$ gesendet wurde. Die Summe läuft dabei über alle $y∈B^N$, für die der Decodierer ein falsches Ergebnis liefert; der Ausdruck in der Summe ist nach \cref{rem:channelRV-N} die Wahrscheinlichkeit, dass dieses $y$ bei gesendetem $x$ auftritt.
   
   Die \emphex{mittlere Blockfehlerrate} ist definiert als
@@ -889,7 +889,7 @@ Für ein solches System können wir nun die Wahrscheinlichkeit eines Decodierfeh
 Wir haben nun alle Definitionen beisammen, um das wichtigste Resultat der Informationstheorie zu formulieren.
 
 \begin{theorem}[Kanalcodierungssatz]\label{thm:channelCoding}
-  Sei ein Kanal $\K$ mit Kapazität $C>0$ gegeben. Für jedes $ε>0$ und $0<R<C$ existiert ein Blockcode $\C$ mit Rate $R' ≥ R$ und ein Decodierer $D_\C$, so dass für den maximalen Blockfehler dieses Systems $p^*_{\mathrm{Err}}(\C) < ε$ gilt.
+  Sei ein Kanal $\K$ mit Kapazität $C>0$ gegeben. Für jedes $ε>0$ und $0<R<C$ existiert ein Blockcode $\C$ mit Rate $R' ≥ R$ und ein Decodierer $D_{\C}$, so dass für den maximalen Blockfehler dieses Systems $p^*_{\mathrm{Err}}(\C) < ε$ gilt.
 \end{theorem}
 
 \begin{example}
@@ -1078,16 +1078,16 @@ Sei nun zum Beweis von \cref{thm:channelCoding} ein Kanal $\K=(B,P_{\K,0}, P_{\K
 
 Wähle zunächst ein $R'∈(R,C) ∩ ℚ$ beliebig, ein positives $β<(C-R')/3$ und setze $δ\coloneqq ε/4$ sowie $N$ \enquote{ausreichend groß} (im Folgenden werden einige Aussagen für \enquote{große} $N$ gelten; das am Ende gewählte $N$ muss dann mindestens das Maximum all dieser Mindestgrößen sein). Konstruiere mit diesen Daten folgendes Kommunikationssystem:
 \begin{enumerate}
-  \item Wähle einen \emph{zufälligen} $(N, K)$-Blockcode mit $K=NR'$, indem jedes der $2^K=2^{NR'}$ Codewörter $x$ nach der Verteilung $P_{X^N}(x) = \prod_{i=1}^N P_X(x_i)$ zufällig gewürfelt wird (mit dem $P_X$ aus der Kanalkapazität). Die einzelnen Codewörter werden unabhängig voneinander gewählt, wodurch wir den \emph{zufälligen Code} $\bar \C$ erhalten; dass dabei auch Codewörter mehrfach auftreten könnten, stört uns nicht weiter.
+  \item Wähle einen \emph{zufälligen} $(N, K)$-Blockcode mit $K=NR'$, indem jedes der $2^K=2^{NR'}$ Codewörter $x$ nach der Verteilung $P_{X^N}(x) = \prod_{i=1}^N P_X(x_i)$ zufällig gewürfelt wird (mit dem $P_X$ aus der Kanalkapazität). Die einzelnen Codewörter werden unabhängig voneinander gewählt, wodurch wir den \emph{zufälligen Code} $\bar{\C}$ erhalten; dass dabei auch Codewörter mehrfach auftreten könnten, stört uns nicht weiter.
   (Damit es einen $(N,K)$-Blockcode gibt, muss $K=NR'∈ℕ$ sein. Falls die Bedingung für unser vorher bestimmtes \enquote{großes $N$} nicht gilt, können wir es mit dem Nenner von $R'∈ℚ$ multiplizieren, um ein noch größeres $N$ mit $NR'∈ℕ$ zu erhalten)
-  \item Sender und Empfänger einigen sich auf diesen zufällig gewählten Code $\bar \C$ sowie eine Codierungsfunktion $E_{\bar \C}\colon \GF(2)^K→\bar \C$ (deren genaue Form uns wieder nicht interessiert), bevor es zur eigentlichen Kommunikation kommt.
-  \item Der Sender erhält ein $K$-Wort aus der Quelle, codiert es zu einem Codewort $x$, und schickt dieses über den Kanal. Beim Empfänger kommt ein entsprechendes $y ∈ B^N$ an. Hier ist gleich dreimal der Zufall im Spiel: bei der Wahl von $\bar \C$, bei der Wahl des Codeworts $x∈\bar \C$, und bei der verrauschten Kanalausgabe $y$.
-  \item Der Empfänger decodiert $y$ mittels eines \emph{Typische-Menge-Decodierers} \[D_{\bar \C}(y) \coloneqq \begin{cases}
-    x∈\bar \C&(x, y)∈T'_{N,β}(X,Y)\text{ und }(x', y)\notin T'_{N,β}(X,Y)\text{ für alle }x≠x'∈\bar \C\tk\\
+  \item Sender und Empfänger einigen sich auf diesen zufällig gewählten Code $\bar{\C}$ sowie eine Codierungsfunktion $E_{\bar{\C}}\colon \GF(2)^K→\bar{\C}$ (deren genaue Form uns wieder nicht interessiert), bevor es zur eigentlichen Kommunikation kommt.
+  \item Der Sender erhält ein $K$-Wort aus der Quelle, codiert es zu einem Codewort $x$, und schickt dieses über den Kanal. Beim Empfänger kommt ein entsprechendes $y ∈ B^N$ an. Hier ist gleich dreimal der Zufall im Spiel: bei der Wahl von $\bar{\C}$, bei der Wahl des Codeworts $x∈\bar{\C}$, und bei der verrauschten Kanalausgabe $y$.
+  \item Der Empfänger decodiert $y$ mittels eines \emph{Typische-Menge-Decodierers} \[D_{\bar{\C}}(y) \coloneqq \begin{cases}
+    x∈\bar{\C}&(x, y)∈T'_{N,β}(X,Y)\text{ und }(x', y)\notin T'_{N,β}(X,Y)\text{ für alle }x≠x'∈\bar{\C}\tk\\
     \t e&\text{sonst.}
   \end{cases}
   \]
-  $D_{\bar \C}$ entscheidet sich also genau dann für ein Codewort $x$, wenn es das einzige mit $y$ gemeinsam $β$-typische Codewort aus $\bar \C$ ist.
+  $D_{\bar{\C}}$ entscheidet sich also genau dann für ein Codewort $x$, wenn es das einzige mit $y$ gemeinsam $β$-typische Codewort aus $\bar{\C}$ ist.
 \end{enumerate}
 
 Obwohl in dieser Konstruktion alles sehr suboptimal aussieht (der zufällige Code könnte zum Beispiel, im schlimmsten Fall, $2^K$-mal das gleiche Codewort enthalten!), werden die starken Eigenschaften von $T'_{N,β}$ erlauben, den Satz zu beweisen.
@@ -1095,19 +1095,19 @@ Obwohl in dieser Konstruktion alles sehr suboptimal aussieht (der zufällige Cod
 Der Typische-Menge-Decodierer macht nach Definition einen Decodierfehler, wenn $x$ nicht das einzige Codewort mit $(x,y)∈T'_{N,β}$ ist. Dazu unterscheiden wir die Ereignisse
 \begin{enumerate}
 \item[F1:] $(x,y)\notin T'_{N,β}$: Das gesendete $x$ ist gar nicht gemeinsam typisch mit der Kanalausgabe,
-\item[F2:] es gibt ein anderes $x'∈\bar \C$, $x'≠x$, das mit $y$ gemeinsam typisch ist: $(x',y)∈T'_{N,β}$.
+\item[F2:] es gibt ein anderes $x'∈\bar{\C}$, $x'≠x$, das mit $y$ gemeinsam typisch ist: $(x',y)∈T'_{N,β}$.
 \end{enumerate}
-F1 und F2 sind nicht disjunkt, decken aber sämtliche Bedingungen ab, unter denen es zum Decodierfehler kommt: Ist $D_{\bar\C}(y)=\t e$, gibt es entweder gar kein mit $y$ gemeinsam typisches Codewort (F1) oder mindestens zwei (F2). Ist $D_{\bar\C}(y)=x'∈\C$, $x'≠x$, muss es genau ein $x'≠x$ mit $x'∈T'_{N,β}$ geben (F1 und F2). Somit gilt
+F1 und F2 sind nicht disjunkt, decken aber sämtliche Bedingungen ab, unter denen es zum Decodierfehler kommt: Ist $D_{\bar{\C}}(y)=\t e$, gibt es entweder gar kein mit $y$ gemeinsam typisches Codewort (F1) oder mindestens zwei (F2). Ist $D_{\bar{\C}}(y)=x'∈\C$, $x'≠x$, muss es genau ein $x'≠x$ mit $x'∈T'_{N,β}$ geben (F1 und F2). Somit gilt
 \begin{equation}
   \pErr(x) = P(\text{F1 oder F2}) ≤ P(\text{F1}) + P(\text{F2})\tp \label{eq:errorEvents}
 \end{equation}
 
-Um zu beweisen, dass ein Code existiert, dessen maximaler Blockfehler $<ε$ ist, schätzen wir zunächst die \emph{über alle zufälligen Codes $\bar \C$} gemittelte durchschnittliche Blockfehlerrate
-  \[\bar \pErr \coloneqq \frac 1{\abs M} \sum_{\C∈M} \pErr(\C) = \E\left[\pErr(\bar \C)\right]\]
+Um zu beweisen, dass ein Code existiert, dessen maximaler Blockfehler $<ε$ ist, schätzen wir zunächst die \emph{über alle zufälligen Codes $\bar{\C}$} gemittelte durchschnittliche Blockfehlerrate
+  \[\bar \pErr \coloneqq \frac 1{\abs M} \sum_{\C∈M} \pErr(\C) = \E\left[\pErr(\bar{\C})\right]\]
 ab, wobei $M$ die Menge aller $(N,K)$-Blockcodes ist. Dies klingt zwar kompliziert, ist aber viel einfacher, als $\pErr(\C)$ für einen \emph{bestimmten} Code auszurechnen: durch zufällige Wahl des Codes wird nämlich die Kanaleingabe zur Zufallsvariable $X^N$, so dass wir \cref{lem:jointTypical} anwenden können.
 \begin{enumerate}
-  \item[F1:] Das gesendete Codewort des zufälligen Codes $\bar\C$ entspricht nach Konstruktion der Zufallsvariablen $X^N$ mit Verteilung $P_{X^N}$, und wie in \cref{rem:channelRV} erhalten wir die zweidimensionale Zufallsvariable $(X,Y)^N$ für Kanal-Ein- und -Ausgabe beim Verschicken dieses zufälligen Codeworts. Nach \cref{lem:jointTypical}, Teil 1 ist $P(\text{F1})=P\((X,Y)^N \notin T'_{N,β}(X,Y)\) < δ$ für ausreichend großes $N$.
-  \item[F2:] Auch jedes andere, nicht dem gesendeten entsprechende zufällige Codewort ist wegen der zufälligen Konstruktion von $\bar \C$ eine Zufallsvariable $\tilde X^N$ mit Verteilung $P_{\tilde X^N} = P_{X^N}$, hat aber im Gegensatz zum tatsächlich gesendeten $X^N$ nichts mit der Kanalausgabe $Y^N$ zu tun, ist also unabhängig von $Y^N$, so dass \[P_{(\tilde XY)^N}(\tilde x,y) = \sum_{i=1}^N P_X(\tilde x_i) P_Y(y_i)\tp\]
+  \item[F1:] Das gesendete Codewort des zufälligen Codes $\bar{\C}$ entspricht nach Konstruktion der Zufallsvariablen $X^N$ mit Verteilung $P_{X^N}$, und wie in \cref{rem:channelRV} erhalten wir die zweidimensionale Zufallsvariable $(X,Y)^N$ für Kanal-Ein- und -Ausgabe beim Verschicken dieses zufälligen Codeworts. Nach \cref{lem:jointTypical}, Teil 1 ist $P(\text{F1})=P\((X,Y)^N \notin T'_{N,β}(X,Y)\) < δ$ für ausreichend großes $N$.
+  \item[F2:] Auch jedes andere, nicht dem gesendeten entsprechende zufällige Codewort ist wegen der zufälligen Konstruktion von $\bar{\C}$ eine Zufallsvariable $\tilde X^N$ mit Verteilung $P_{\tilde X^N} = P_{X^N}$, hat aber im Gegensatz zum tatsächlich gesendeten $X^N$ nichts mit der Kanalausgabe $Y^N$ zu tun, ist also unabhängig von $Y^N$, so dass \[P_{(\tilde XY)^N}(\tilde x,y) = \sum_{i=1}^N P_X(\tilde x_i) P_Y(y_i)\tp\]
   Somit können wir Teil 3 von \cref{lem:jointTypical} anwenden und erhalten
   \[P\( (\tilde X^N, Y^N) ∈ T'_{N,β}\) ≤ 2^{-N(I(X∥Y)-3β)} = 2^{-N(C-3β)}\]
   als Wahrscheinlichkeit für \emph{ein} nicht gesendetes Codewort, gemeinsam typisch mit der Kanalausgabe zu sein. Da der Code insgesamt $2^K$ Codewörter enthält, gibt es $2^K-1 = 2^{NR'}-1$ solche nicht gesendeten Codewörter, die für $\tilde X^N$ infrage kommen, und wir erhalten
@@ -1119,7 +1119,7 @@ Insgesamt gilt damit für $N>N_0$ nach \cref{eq:errorEvents}
                         ≤ P(\text{F1}) + P(\text{F2})
                         ≤ δ + 2^{-N(C-R'-3β)}\tp
 \]
-Da $C-R'-3β > C-R'-3\frac{C-R'}3 = 0$ ist der Exponent von $2^{-N(C-R'-3β)}$ negativ und damit $\bar \pErr = \E[\pErr(\bar\C)] < 2δ = ε/2$ für hinreichend große $N$. Nach Teil 1 von \cref{lem:expectation} muss dann aber auch für \emph{mindestens einen Code} $\C'$ die Bedingung $\pErr(\C') < ε/2$ gelten.
+Da $C-R'-3β > C-R'-3\frac{C-R'}3 = 0$ ist der Exponent von $2^{-N(C-R'-3β)}$ negativ und damit $\bar \pErr = \E[\pErr(\bar{\C})] < 2δ = ε/2$ für hinreichend große $N$. Nach Teil 1 von \cref{lem:expectation} muss dann aber auch für \emph{mindestens einen Code} $\C'$ die Bedingung $\pErr(\C') < ε/2$ gelten.
 
 Wir haben es fast geschafft. Allerdings wollen wir noch ein bisschen mehr, nämlich einen Code mit \emph{maximaler} Fehlerwahrscheinlichkeit $p^*_{\mathrm{Err}} < ε$. Die Aussage $\pErr(\C') < ε/2$ schließt noch nicht aus, dass einzelne Codewörter mit extrem hoher Wahrscheinlichkeit falsch decodiert werden (ist ein Codewort zum Beispiel nicht typisch für $X$, wird es nie richtig decodiert). Dem kommen wir bei, indem wir einfach die schlechteste Hälfte der Codewörter, also die $x∈\C'$, für die $\pErr(x)$ am größten ist, wegschmeißen. Damit erhalten wir einen Code $\C$, für den nach Teil~2 von \cref{lem:expectation} $\pErr^*<ε$ gilt. Da wir die Hälfte der Codewörter entfernt haben, gilt \[\abs{\C}= \abs{\C'}/2 = 2^K/2 = 2^{K-1} = 2^{NR'-1}\]
 und die Rate von $\C$ ist $\frac{K-1}N = R'-\frac1N$. Da $R'>R$ nach Wahl, ist für ausreichend große $N$ auch $R'-\frac1N>R$, und $\C$ erfüllt alle Behauptungen von \cref{thm:channelCoding}.

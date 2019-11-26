@@ -1,0 +1,231 @@
+%% mh_basic -- basic tex setup file with XeTeX/LuaTeX support.
+%% Copyright 2013-2014 by Michael Helmling
+%% Newest version: github.com/supermihi/latex
+%%
+%% Feel free to use and modify to your wish!
+\RequirePackage{expl3,l3keys2e,xparse}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesExplPackage
+  {mh_basic}
+  {2014/06/25}
+  {5}
+  {LaTeX setup package for UTF-8 encoded files with pdf-/Xe-/LuaLaTeX and optional math support}
+  
+\keys_define:nn { mhbasic } {
+  german       .code:n = {\tl_set:Nn \mhlang {german}},
+  english      .code:n = {\tl_set:Nn \mhlang {english}},
+
+  babel        .bool_set:N  = \l_mhbasic_babel,
+  babel        .initial:n   = true,
+  
+  fonts        .bool_set:N  = \l_mhbasic_myfonts,
+  fonts        .initial:n   = false,
+  
+  math         .bool_set:N  = \l_mhbasic_math,
+  math         .initial:n   = true,
+  
+  unimath      .bool_set:N  = \l_mhbasic_unimath,
+  unimath      .initial:n   = false,
+  
+  prettyref    .bool_set:N  = \l_mhbasic_prettyref,
+  prettyref    .initial:n   = false,
+}
+\tl_set:Nn \mhlang {english} % default language
+\ProcessKeysOptions { mhbasic }
+\bool_if:NTF % unimath implies math
+  \l_mhbasic_unimath
+  {
+    \bool_set_true:N \l_mhbasic_math
+  }
+  {  }
+% no unimath in pdftex mode!
+\bool_if:NTF
+  \sys_if_engine_pdftex_p:
+  {\bool_set_false:N \l_mhbasic_unimath}
+  {}
+
+\bool_if:NTF
+  \l_mhbasic_math
+  {
+    \RequirePackage{amsfonts,amsmath,amssymb}
+    \bool_if:NTF
+      \l_mhbasic_unimath
+      { \RequirePackage{unicode-math} }
+      {  }
+    \bool_if:nTF
+     {\l_mhbasic_myfonts && !(\l_mhbasic_unimath) }
+     { \RequirePackage{euler} }
+     {  }
+   \bool_if:nTF
+     {\l_mhbasic_myfonts && \l_mhbasic_unimath && !(\sys_if_engine_pdftex_p:) }
+     {
+       \unimathsetup{math-style=upright}
+       \setmathfont{Neo~Euler}
+       \setmathfont[range={\mathcal,\mathbfcal,\mathbb},StylisticSet=1]{XITS~Math}
+     }
+     {  }
+  }
+  {  }
+
+\sys_if_engine_pdftex:TF
+  { % pdfLaTeX
+    \RequirePackage[utf8]{inputenc}
+    \RequirePackage[T1]{fontenc}
+    \bool_if:NTF
+      \l_mhbasic_myfonts
+      {
+        \RequirePackage{libertine}
+        \RequirePackage{inconsolata}
+      }
+      {}
+    \bool_if:NTF
+      \l_mhbasic_babel
+      {
+        \str_if_eq:VnTF
+          \mhlang
+          {english}
+          {\RequirePackage[english]{babel}}
+          {\RequirePackage[ngerman]{babel}}
+      }
+      {  }
+  }
+  { % XeLaTeX or LuaLaTeX
+    \RequirePackage{fontspec}
+    \defaultfontfeatures{Ligatures=TeX}
+    \bool_if:NTF
+      \l_mhbasic_myfonts
+      {
+        \setromanfont[Numbers=Proportional]{Linux~Libertine~O}
+        \setsansfont[Numbers=Proportional]{Linux~Biolinum~O}
+        \setmonofont{Inconsolata}
+      }
+      {  }
+    \bool_if:NTF
+      \l_mhbasic_babel
+      {
+        \RequirePackage[babelshorthands]{polyglossia}
+        \ExplSyntaxOff\setmainlanguage{\mhlang}\ExplSyntaxOn
+      }
+      {  }
+  }
+
+\RequirePackage{csquotes}
+\RequirePackage{microtype}
+\RequirePackage{ragged2e}
+\RequirePackage{tabularx}
+\RequirePackage{xspace}
+
+\bool_if:NTF
+  \l_mhbasic_math
+  {
+    \RequirePackage{mathtools}
+    % Useful math abbreviations
+    \newcommand{\Z}{\mathbb{Z}} % integrals
+    \newcommand{\Q}{\mathbb{Q}} % fractions
+    \newcommand{\N}{\mathbb{N}} % integers
+    \newcommand{\R}{\mathbb{R}} % reals
+    \DeclareDocumentCommand\C{}{\mathbb{C}} % complex numbers
+    \newcommand{\F}{\mathbb{F}} % finite fields
+    \DeclareDocumentCommand\O{}{\mathcal{O}} % Landau notation
+    \newcommand{\E}{\mathbb{E}} % Expectation
+    \DeclareMathOperator{\Var}{Var} % Variance
+    \newcommand{\NP}{{\sffamily NP}} % NP complexity class
+    \DeclareDocumentCommand\P{}{\textsf{P}} % P complexity class
+    \newcommand{\Llra}{\ensuremath{\Longleftrightarrow}}
+    
+    % Commands with size-adjusting braces
+    \newcommand\abs[1]{\left\lvert #1 \right\rvert} % absolute value
+    \newcommand\norm[1]{\left\| #1 \right\|} % norms
+    \newcommand\set[1]{\left\{#1\right\}} % sets
+    \newcommand\legendre[2]{\left(\frac{#1}{#2}\right)} % Legendre symbol (fraction in parentheses)
+    \newcommand\gauss[1]{\left\lfloor #1 \right\rfloor} % Gauss operator (floor)
+    
+    % Text mode punctuation in display formulas
+    \newcommand\tp{\text{.}}
+    \newcommand\tk{\text{,}}
+    \newcommand\ts{\text{;}}
+    
+    % := with vertically centered colon (requires mathtools)
+    \newcommand\definedAs{\vcentcolon=} 
+    
+    \newcommand{\algname}[1]{\textsc{#1}} % name of algorithms in small caps
+    
+    % Math operators
+    \newcommand{\op}[1]{\operatorname{#1}} % handy abbreviation
+    \DeclareMathOperator{\ggT}{ggT}
+    \DeclareMathOperator{\kgV}{kgV}
+    \DeclareMathOperator{\ord}{ord}
+    \DeclareMathOperator*{\argmin}{arg\,min}
+    \DeclareMathOperator*{\argmax}{arg\,max}
+    \DeclareMathOperator{\conv}{conv}
+    \DeclareMathOperator{\proj}{proj}
+    \DeclareMathOperator{\aff}{aff}
+    \DeclareMathOperator{\eq}{eq}
+    \DeclareMathOperator{\rank}{rank}
+    \DeclareMathOperator{\spn}{span}
+    \DeclareMathOperator{\supp}{supp}
+    \DeclareDocumentCommand\spnp{m}{\spn\left(#1\right)}
+    \DeclareDocumentCommand\affp{m}{\aff\left(#1\right)}
+  }
+  {  }
+% common abbreviations
+\DeclareDocumentCommand
+  {\emphex}
+  { o m }
+  {\emph{#2}\index{\IfNoValueTF{#1}{#2}{#1}}}
+
+\str_if_eq:VnTF
+  \mhlang
+  {german}
+  {
+    \DeclareDocumentCommand{\zB}{}{\text{z.\,B.}\xspace}
+    \DeclareDocumentCommand{\sd}{}{\text{s.\,d.}\xspace}
+    \AtBeginDocument{
+      \DeclareDocumentCommand{\dh}{}{\text{d.\,h.}\xspace}}
+  }
+  {
+    \DeclareDocumentCommand{\st}  { } {\text{s.t.} \xspace}
+    \DeclareDocumentCommand{\ie}  { } {\text{i.e.} \xspace}
+    \DeclareDocumentCommand{\eg}  { } {\text{e.g.} \xspace}
+    \DeclareDocumentCommand{\wrt} { } {\text{wrt.}   \xspace}
+  }
+
+\bool_if:NTF
+  \l_mhbasic_prettyref
+  {
+    % reference formats
+    \RequirePackage{prettyref}
+    \newrefformat{eq}{\textup{(\ref{#1})}}
+    \newrefformat{def}{Definition~\ref{#1}}
+    \newrefformat{lemma}{Lemma~\ref{#1}}
+    \str_if_eq:VnTF
+      \mhlang
+      {german}
+      {
+        \newrefformat{alg}{Algorithmus~\ref{#1}}
+        \newrefformat{fig}{Abbildung~\ref{#1}}
+        \newrefformat{rem}{Bemerkung~\ref{#1}}
+        \newrefformat{example}{Beispiel~\ref{#1}}
+        \newrefformat{chapter}{Kapitel~\ref{#1}}
+        \newrefformat{sec}{Abschnitt~\ref{#1}}
+        \newrefformat{thm}{Satz~\ref{#1}}
+        \newrefformat{obs}{Beobachtung~\ref{#1}}
+        \newrefformat{cor}{Korollar~\ref{#1}}
+        \newrefformat{line}{Zeile~\ref{#1}}
+        \newrefformat{table}{Tabelle~\ref{#1}}
+      }
+      {
+        \newrefformat{alg}{Algorithm~\ref{#1}}
+        \newrefformat{fig}{Figure~\ref{#1}}
+        \newrefformat{rem}{Remark~\ref{#1}}
+        \newrefformat{example}{Example~\ref{#1}}
+        \newrefformat{chapter}{Chapter~\ref{#1}}
+        \newrefformat{sec}{Section~\ref{#1}}
+        \newrefformat{thm}{Theorem~\ref{#1}}
+        \newrefformat{obs}{Observation~\ref{#1}}
+        \newrefformat{cor}{Corollary~\ref{#1}}
+        \newrefformat{line}{Line~\ref{#1}}
+        \newrefformat{table}{Table~\ref{#1}}
+      }
+  }
+  {  }
